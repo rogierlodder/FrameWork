@@ -12,7 +12,7 @@ namespace FWOClientTests
     {
         protected override void Append(LoggingEvent loggingEvent)
         {
-            int i = 0;
+            
         }
     }
 }

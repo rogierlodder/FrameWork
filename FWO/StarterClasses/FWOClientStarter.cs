@@ -17,7 +17,7 @@ namespace FWO
         private static GTLClientFWO FWOClient;
         private static GTLClientDescriptions DSCClient;
         private static Timer CycleTimer;
-        private const int Cycletime = 20;
+        private const int Cycletime = 200;
 
         public static GTLClientNotifications NotifClient;
         public static bool ClientHasStarted  { get; private set; } = false;

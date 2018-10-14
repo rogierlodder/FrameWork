@@ -97,10 +97,10 @@ namespace FWO
 
         public override void Run()
         {
+            if (!Running) return;
+
             //run the state machine of the ethernet client
             client.Run();
-
-            if (!Running) return;
 
             if (IsConnected)
             {

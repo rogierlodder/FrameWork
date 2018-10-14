@@ -1,0 +1,8 @@
+﻿This document will give an overview of the FWO framework.
+
+Introduction.
+
+The purpose of the framework is to provide a mechanism to provide a server-like program with a GUI that runs in a different process. The server is only aware of the GUI through the Ethernet connections. he GUI can be started or stopped or even crash without having  any influence on the server process. 
+
+
+

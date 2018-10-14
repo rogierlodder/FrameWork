@@ -4,6 +4,8 @@ namespace FWO
 {
     public abstract class GTLServiceBase 
     {
+        static log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceBase");
+
         public static List<GTLServiceBase> AllServers { get; protected set; } = new List<GTLServiceBase>();
 
         public static Dictionary<uint, ClientConnection> ClientSessions { get; set; } = new Dictionary<uint, ClientConnection>();
@@ -29,10 +31,12 @@ namespace FWO
                 {
                     //remove all connections from the server
                     string connName = ClientSessions[ClientID].ConnectionName;
+                    log.Debug($"Client {connName} was removed from the client list");
                     Server.RemoveClient(connName);
                 }
                 //remove the client from the FWO elements
                 ClientSessions[ClientID].DeleteFWORef(ClientID);
+                
 
                 //erase the client from the sesions list
                 ClientSessions.Remove(ClientID);

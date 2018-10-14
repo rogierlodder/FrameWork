@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWOServiceTests", "FWOTesti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWOClientTests", "FWOClientTests\FWOClientTests.csproj", "{EECAD8BA-92DB-40E2-841C-52905E616471}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWOClientTest_GUI", "FWOClientTest_GUI\FWOClientTest_GUI.csproj", "{B680FD77-29F3-44C2-BFB4-AE338C7E7E18}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2003C615-557D-45D7-82A1-FA9A0F08AB8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,13 +35,14 @@ Global
 		{EECAD8BA-92DB-40E2-841C-52905E616471}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EECAD8BA-92DB-40E2-841C-52905E616471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EECAD8BA-92DB-40E2-841C-52905E616471}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B680FD77-29F3-44C2-BFB4-AE338C7E7E18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B680FD77-29F3-44C2-BFB4-AE338C7E7E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B680FD77-29F3-44C2-BFB4-AE338C7E7E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B680FD77-29F3-44C2-BFB4-AE338C7E7E18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A64431E-F270-4172-8B02-F9636445D19C} = {2003C615-557D-45D7-82A1-FA9A0F08AB8A}
+		{AC219A74-FF0B-4D6A-A6E5-EB89C0B08FC1} = {2003C615-557D-45D7-82A1-FA9A0F08AB8A}
+		{EECAD8BA-92DB-40E2-841C-52905E616471} = {2003C615-557D-45D7-82A1-FA9A0F08AB8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B43A522D-6FDA-473D-93C3-10FB018D62BE}

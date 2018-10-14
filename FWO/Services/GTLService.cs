@@ -44,7 +44,7 @@ namespace FWO
         {
             try
             {
-                server = new CEthernetServer<ConnectionBase>(Name,"0.0.0.0", portNr, "TCP", clientBuffeSize, 50000);
+                server = new CEthernetServer<ConnectionBase>(Name,"0.0.0.0", portNr, "TCP", clientBuffeSize, 0);
                 log.Info($"{Name} started on port {portNr}");
             }
             catch
