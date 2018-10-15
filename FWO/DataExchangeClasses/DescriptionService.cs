@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
     public class DescriptionRequest : FWORequestBase

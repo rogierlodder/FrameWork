@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
     public class CClientInfo : FWORequestBase

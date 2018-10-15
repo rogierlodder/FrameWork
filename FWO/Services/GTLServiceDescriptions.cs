@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FWO
+namespace RGO
 {
     public class GTLServiceDescriptions : GTLService<DescriptionRequest, DescriptionReply>
     {
@@ -17,8 +17,8 @@ namespace FWO
             Request = new DescriptionRequest();
             Reply = new DescriptionReply();
 
-            LocalDict = FWOBase.AllFWO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
-            IDList = FWOBase.AllFWO.Select(p => p.Value.ID).ToList();
+            LocalDict = RGOBase.AllFWO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
+            IDList = RGOBase.AllFWO.Select(p => p.Value.ID).ToList();
         }
 
         public override bool ProcessData()

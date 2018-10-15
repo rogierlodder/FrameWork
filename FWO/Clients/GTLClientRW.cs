@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FWO
+namespace RGO
 {
     public class GTLClientRW : GTLClient<RequestRW, ReplyRW>
     {
@@ -36,8 +36,8 @@ namespace FWO
             foreach (var F in Reply.FWOList)
             {
                 int id = F.ID;
-                FWOBase.AllFWO[id].CopyValues(F);
-                FWOBase.AllFWO[id].Update?.Invoke();
+                RGOBase.AllFWO[id].CopyValues(F);
+                RGOBase.AllFWO[id].Update?.Invoke();
             }
         }
     }

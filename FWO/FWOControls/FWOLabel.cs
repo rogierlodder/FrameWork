@@ -1,14 +1,14 @@
 ﻿using System.Windows.Controls;
-using FWO;
+using RGO;
 using System.Linq;
 using System.Windows.Media;
 using System.Collections.Generic;
 
-namespace FWO
+namespace RGO
 {
     public class FWOLabel : Label, IUpdatableControl
     {
-        private FWOBase FWObject;
+        private RGOBase FWObject;
 
         private string[] errorString, onString, transitionString;
         private bool IsStatusVariableString = false;
@@ -47,8 +47,8 @@ namespace FWO
         private void Init(int modnr, int id)
         {
             ObjectIDs = new List<ObjectID>();
-            ObjectIDs.Add(new ObjectID(FWOBase.CalcID(modnr, id), ElementTypeEnum.Read));
-            FWObject = FWOBase.GetFromID(modnr, id);
+            ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.Read));
+            FWObject = RGOBase.GetFromID(modnr, id);
 
             if (FWObject != null)
             {

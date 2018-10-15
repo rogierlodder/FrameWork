@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace FWO
+namespace RGO
 {
 
     /* The purpose of the IO category is to distinguish between values that are measured by the IO system and those that sre measured by external devices like pumps or power supplies */
@@ -13,7 +13,7 @@ namespace FWO
 
     /* An IO is any measured, physical value. They are therefore only floating point of boolean.*/
     [Serializable]
-    public abstract class IO<T> : FWOBase where T : struct, IComparable<T>
+    public abstract class IO<T> : RGOBase where T : struct, IComparable<T>
     {
         //conversion function to convert from Volts to real-world values or back
         public delegate double ExternalConversion(double input);
@@ -66,7 +66,7 @@ namespace FWO
             Category = cat;
         }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             if (newVal == null || this == null) return;
             if (RunsOnServer)
@@ -113,7 +113,7 @@ namespace FWO
 
         public AI(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             base.CopyValues(newVal);
         }
@@ -140,7 +140,7 @@ namespace FWO
 
         public AO(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             base.CopyValues(newVal);
         }
@@ -163,7 +163,7 @@ namespace FWO
  
         public DI(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             base.CopyValues(newVal);
         }
@@ -186,7 +186,7 @@ namespace FWO
 
         public DO(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             base.CopyValues(newVal);
         }

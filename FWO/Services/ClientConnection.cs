@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public enum FWODownloadStates { Idle, DownLoading, Finished }
 
@@ -24,12 +24,12 @@ namespace FWO
 
         public ClientConnection(uint ID)
         {
-            FWOBase.AddClientID(ID);
+            RGOBase.AddClientID(ID);
         }
 
         public void DeleteFWORef(uint ID)
         {
-            FWOBase.RemoveClientID(ID);
+            RGOBase.RemoveClientID(ID);
         }
 
         

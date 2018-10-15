@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FWO
+namespace RGO
 {
     public class GTLServiceServerConn : GTLService<CClientInfo, CServerInfo>
     {
@@ -23,7 +23,7 @@ namespace FWO
                 else
                 {
                     C.Value.ClientDisconnectCounter++;
-                    if (C.Value.ClientDisconnectCounter > FWOSettings.DisconnectCount 
+                    if (C.Value.ClientDisconnectCounter > GTLServiceBase.DisconnectCount 
                         && C.Value.ClientConnected == true)
                     {
                         C.Value.ClientConnected = false;
@@ -51,15 +51,15 @@ namespace FWO
 
             if (ClientSessions.ContainsKey(ID) == false)
             {
-                if (ClientSessions.Count < FWOSettings.maxNrClients)
+                if (ClientSessions.Count < GTLServiceBase.maxNrClients)
                 {
                     var clientConn = new ClientConnection(ID)
                     {
                         IsLocal = Connection.IsOnLoopback,
-                        BatchSize = FWOSettings.LocalBatchsize,
+                        BatchSize = GTLServiceBase.LocalBatchsize,
                         ConnectionName = Connection.Address
                     };
-                    if (!Connection.IsOnLoopback) clientConn.BatchSize = FWOSettings.RemoteBatchsize;
+                    if (!Connection.IsOnLoopback) clientConn.BatchSize = GTLServiceBase.RemoteBatchsize;
 
                     ClientSessions.Add(ID, clientConn);
 

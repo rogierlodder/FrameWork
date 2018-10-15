@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
-using FWO;
+using RGO;
 using System.Windows.Media;
 
-namespace FWO
+namespace RGO
 {
     public class FWOTextBox : TextBox, IUpdatableControl
     {
-        private FWOBase stp;
-        private FWOBase MinEQP, MaxEQP;
+        private RGOBase stp;
+        private RGOBase MinEQP, MaxEQP;
 
         public int ModNr { get; set; } = -1;
         public int ID { get; set; }
@@ -52,11 +52,11 @@ namespace FWO
         private void Init(int modnr, int id)
         {
             ObjectIDs = new List<ObjectID>();
-            ObjectIDs.Add(new ObjectID(FWOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
-            stp = FWOBase.GetFromID(modnr, id);
+            ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
+            stp = RGOBase.GetFromID(modnr, id);
 
-            if (MinEQPID != -1) MinEQP = FWOBase.GetFromID(FWOBase.CalcID(modnr, MinEQPID));
-            if (MaxEQPID != -1) MaxEQP = FWOBase.GetFromID(FWOBase.CalcID(modnr, MaxEQPID));
+            if (MinEQPID != -1) MinEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MinEQPID));
+            if (MaxEQPID != -1) MaxEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MaxEQPID));
 
             if (stp != null && stp.GetType().Name.Contains("STP"))
             {

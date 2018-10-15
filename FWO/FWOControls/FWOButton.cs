@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
-using FWO;
+using RGO;
 
-namespace FWO
+namespace RGO
 {
     public class FWOButton : Button, IUpdatableControl
     {
-        private GuiCMD command;
+        private CMD command;
 
         public string CommandString { get; set; } = "";
         public int ModNr { get; set; } = -1;
@@ -41,8 +41,8 @@ namespace FWO
         private void Init(int modnr, int id)
         {
             ObjectIDs = new List<ObjectID>();
-            ObjectIDs.Add(new ObjectID(FWOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
-            command = FWOBase.GetFromID(modnr, id) as GuiCMD;
+            ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
+            command = RGOBase.GetFromID(modnr, id) as CMD;
 
             if (command != null)
             {

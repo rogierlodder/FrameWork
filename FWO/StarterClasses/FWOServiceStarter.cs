@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public class FWOServiceStarter : FWOStarterBase
     {
@@ -21,7 +21,6 @@ namespace FWO
         public static int ServerConnBufSize { get; set; } = 500000;
         public static int FWOServiceBufSize { get; set; } = 500000;
         public static int RWServiceBufSize { get; set; } = 500000;
-        public static int DebugServiceBufSize { get; set; } = 500000;
         public static int DescriptionServiceBufSize { get; set; } = 500000;
         public static int NotifServiceBufSize { get; set; } = 500000;
 
@@ -34,7 +33,7 @@ namespace FWO
 
         public static void StartServices(int basePortNr)
         {
-            FWOBase.RunsOnServer = true;
+            RGOBase.RunsOnServer = true;
 
             if (basePortNr == 0) basePortNr = DefBasePort;
             SetPorts(basePortNr);

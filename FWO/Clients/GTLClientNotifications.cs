@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public class GTLClientNotifications : GTLClientRW
     {

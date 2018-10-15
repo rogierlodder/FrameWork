@@ -9,7 +9,7 @@ using EthernetCommunication;
 using System.Diagnostics;
 using System.Threading;
 
-namespace FWO
+namespace RGO
 {
     public abstract class GTLClient<TRequest, TReply> : GTLClientBase where TRequest : class
                                                                       where TReply : class

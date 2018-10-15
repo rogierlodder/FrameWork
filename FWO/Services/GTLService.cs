@@ -6,12 +6,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace FWO
+namespace RGO
 {
     public abstract class GTLService<TRequest, TReply> : GTLServiceBase where TRequest : class
                                                                         where TReply : class
     {
         log4net.ILog log = log4net.LogManager.GetLogger("GTLService");
+
+
 
         public int NrConnections { get { return server.NrConnections; } }
         public TRequest Request;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
     public class FWORequestBase

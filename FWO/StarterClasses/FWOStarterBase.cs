@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public class FWOStarterBase
     {
@@ -13,7 +13,6 @@ namespace FWO
         public static int ServerCommServicePort { get; protected set; } = 0;
         public static int FrameWorkObjectServiceport { get; protected set; } = 1;
         public static int RWServicePort { get; protected set; } = 2;
-        public static int DebugMessageServicePort { get; protected set; } = 3;
         public static int DescriptionServicePort { get; protected set; } = 4;
         public static int NotificationServicePort { get; protected set; } = 5;
 
@@ -22,7 +21,6 @@ namespace FWO
             ServerCommServicePort += basePortNr;
             FrameWorkObjectServiceport += basePortNr;
             RWServicePort += basePortNr;
-            DebugMessageServicePort += basePortNr;
             DescriptionServicePort += basePortNr;
             NotificationServicePort += basePortNr;
         }

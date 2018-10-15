@@ -1,5 +1,5 @@
 ﻿
-namespace FWO
+namespace RGO
 {
     public class GTLServiceRW : GTLService<RequestRW, ReplyRW>
     {
@@ -12,15 +12,15 @@ namespace FWO
 
         public override bool ProcessData()
         {
-            foreach (var F in Request.WriteList) FWOBase.AllFWO[F.ID].CopyValues(F);
+            foreach (var F in Request.WriteList) RGOBase.AllFWO[F.ID].CopyValues(F);
 
             Reply.FWOList.Clear();
             foreach (var I in Request.ReqList)
             {
-                if (FWOBase.AllFWO[I].MustSerialize)
+                if (RGOBase.AllFWO[I].MustSerialize)
                 {
-                    FWOBase.AllFWO[I].MustSerialize = false;
-                    Reply.FWOList.Add(FWOBase.AllFWO[I]);
+                    RGOBase.AllFWO[I].MustSerialize = false;
+                    Reply.FWOList.Add(RGOBase.AllFWO[I]);
                 }
             }
 

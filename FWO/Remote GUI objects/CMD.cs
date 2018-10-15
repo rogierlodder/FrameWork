@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
-    public class GuiCMD : FWOBase
+    public class CMD : RGOBase
     {
         public delegate void CMDDelegate(string args);
         [NonSerialized]
@@ -22,18 +22,18 @@ namespace FWO
             set { if (value != _CanExecute) { _CanExecute = value; MustSerialize = true; } }
         }
 
-        public GuiCMD(int modnr, int id, CMDDelegate cmd, string desc) : base(modnr, id, desc)
+        public CMD(int modnr, int id, CMDDelegate cmd, string desc) : base(modnr, id, desc)
         {
             _Args = "";
             Command = cmd;
         }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             if (RunsOnServer)
-            if ((newVal as GuiCMD).Args != "") Command?.Invoke((newVal as GuiCMD).Args);
+            if ((newVal as CMD).Args != "") Command?.Invoke((newVal as CMD).Args);
 
-            _CanExecute = ((GuiCMD)newVal)._CanExecute;
+            _CanExecute = ((CMD)newVal)._CanExecute;
         }
     }
 }

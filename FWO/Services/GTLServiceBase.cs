@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FWO
+namespace RGO
 {
     public abstract class GTLServiceBase 
     {
@@ -43,6 +43,12 @@ namespace FWO
             }
             removeList.Clear();
         }
+
+        //settings
+        public static int LocalBatchsize { get; set; } = 500;
+        public static int RemoteBatchsize { get; set; } = 10;
+        public static int DisconnectCount { get; set; } = 20;
+        public static int maxNrClients { get; set; } = 4;
 
         protected static void AddToRemoveList(uint id)
         {

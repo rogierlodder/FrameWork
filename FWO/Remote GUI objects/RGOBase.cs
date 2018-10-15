@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace FWO
+namespace RGO
 {
     public enum Units { none, s, mm, mBar, minutes, W, kW, SCCM, SLM, A, mA, mm_per_s, mm_per_s_square, RPM }
 
     [Serializable]
-    public abstract class FWOBase
+    public abstract class RGOBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
 
         public delegate void InitdebugOutput(string msg);
         [NonSerialized]
@@ -57,7 +56,7 @@ namespace FWO
         [NonSerialized]
         public string Description;
 
-        static public Dictionary<int, FWOBase> AllFWO = new Dictionary<int, FWOBase>();
+        static public Dictionary<int, RGOBase> AllFWO = new Dictionary<int, RGOBase>();
 
         /// <summary>
         /// Contructor
@@ -65,7 +64,7 @@ namespace FWO
         /// <param name="modnr"></param>
         /// <param name="id"></param>
         /// <param name="desc"></param>
-        public FWOBase(int modnr, int id, string desc)
+        public RGOBase(int modnr, int id, string desc)
         {
             ModNr = modnr;
             ID = CalcID(modnr, id);
@@ -97,12 +96,12 @@ namespace FWO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static FWOBase GetFromID(int ID)
+        public static RGOBase GetFromID(int ID)
         {
             if (AllFWO.ContainsKey(ID)) return AllFWO[ID]; else return null;
         }
 
-        public static FWOBase GetFromID(int modnr, int ID)
+        public static RGOBase GetFromID(int modnr, int ID)
         {
             if (AllFWO.ContainsKey(CalcID(modnr,  ID))) return AllFWO[CalcID(modnr, ID)]; else return null;
         }
@@ -132,7 +131,7 @@ namespace FWO
         /// Copy the relevant values from a deserialized object to the object in the AllFWO list with the same ID
         /// </summary>
         /// <param name="newVal"></param>
-        public abstract void CopyValues(FWOBase newVal);
+        public abstract void CopyValues(RGOBase newVal);
 
         /// <summary>
         /// Get the value of the FWO as a string

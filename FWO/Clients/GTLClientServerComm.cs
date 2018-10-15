@@ -2,7 +2,7 @@
 using System.Threading;
 using System;
 
-namespace FWO
+namespace RGO
 {
     public class GTLClientServerComm : GTLClient<CClientInfo, CServerInfo>
     {

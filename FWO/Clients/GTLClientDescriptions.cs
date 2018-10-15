@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public class GTLClientDescriptions : GTLClient<DescriptionRequest, DescriptionReply>
     {
@@ -48,7 +48,7 @@ namespace FWO
             {
                 foreach (var F in Reply.Descriptions)
                 {
-                    FWOBase.AllFWO[F.Key].Description = F.Value;
+                    RGOBase.AllFWO[F.Key].Description = F.Value;
                 }
             }
             catch { throw new Exception("Unknown FWO received on the Description service"); }

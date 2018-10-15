@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FWO;
+using RGO;
 
 namespace FrameWorkUnitTests
 {
@@ -10,11 +10,11 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void EQP_double_CopyValues_test()
         {
-            FWOBase.ClearAll();
-            FWOBase T = null;
+            RGOBase.ClearAll();
+            RGOBase T = null;
             EQP<double> E = new EQP<double>(1, 10100, "TestSubSys", "TestParname", 100.00, 10, 1000, Units.mBar, "TestDescription");
             EQP<double> E_new = new EQP<double>(1, 10101, "TestSubSys", "TestParname", 100.01, 9, 1001, Units.mBar, "TestDescription");
-            FWOBase.AddClientID(123456);
+            RGOBase.AddClientID(123456);
             T = E;
             T.CopyValues(E_new);
 
@@ -25,7 +25,7 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void EQP_Serialization_Tests()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
             EQP<double> eqp1 = new EQP<double>(5, 10100, "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
             EQP<double> eqp2 = new EQP<double>(5, 10101, "TestSubSys", "testParName", 11.5, 5, 15, Units.mA, "Test description");
 
@@ -43,8 +43,8 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void SV_double_CopyValues_test()
         {
-            FWOBase.ClearAll();
-            FWOBase T = null;
+            RGOBase.ClearAll();
+            RGOBase T = null;
             SV<double> sv1 = new SV<double>(1, 10100, "TestDescription");
             SV<double> sv2 = new SV<double>(1, 10101, "TestDescription");
 
@@ -61,8 +61,8 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void IO_CopyValues_Override_on_Server()
         {
-            FWOBase.ClearAll();
-            FWOBase T = null;
+            RGOBase.ClearAll();
+            RGOBase T = null;
             AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
             AI analogIn2 = new AI(1, 10101, IOCategory.Real, "test description");
 
@@ -93,8 +93,8 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void IO_CopyValues_on_Client()
         {
-            FWOBase.ClearAll();
-            FWOBase.RunsOnServer = false;
+            RGOBase.ClearAll();
+            RGOBase.RunsOnServer = false;
             AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
             AI analogIn2 = new AI(1, 10101, IOCategory.Real, "test description");
 
@@ -117,13 +117,13 @@ namespace FrameWorkUnitTests
             Assert.AreEqual(analogIn1.IsValid, analogIn2.IsValid);
             Assert.AreEqual(analogIn1.IsOverRidden, analogIn2.IsOverRidden);
 
-            FWOBase.RunsOnServer = true;
+            RGOBase.RunsOnServer = true;
         }
 
         [TestMethod]
         public void AI_test()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
             AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
 
             analogIn1.RawValue = 5;
@@ -149,7 +149,7 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void AO_test()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
             AO aout1 = new AO(1, 10100, IOCategory.Real, "test description");
 
             aout1.Value = 5.0;
@@ -176,7 +176,7 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void DI_test()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
             DI di = new DI(6, 10100, IOCategory.Real, "test description");
             di.MustSerialize = false;
 
@@ -198,7 +198,7 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void DO_test()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
             DO dout = new DO(6, 10100, IOCategory.Real, "test description");
             dout.MustSerialize = false;
 
@@ -219,8 +219,8 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void STP_Copyvalues_double()
         {
-            FWOBase.ClearAll();
-            FWOBase T = null;
+            RGOBase.ClearAll();
+            RGOBase T = null;
             STP<double> setp1 = new STP<double>(5, 10100, "Test description");
             STP<double> setp2 = new STP<double>(5, 10101, "Test description");
 
@@ -239,10 +239,10 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void FWO_Array_test()
         {
-            FWOBase.ClearAll();
-            FWOBase T = null;
-            FWOArray<double> farr1 = new FWOArray<double>(5, 10100, 10, "test description");
-            FWOArray<double> farr2 = new FWOArray<double>(5, 10101, 10, "test description");
+            RGOBase.ClearAll();
+            RGOBase T = null;
+            ARRAY<double> farr1 = new ARRAY<double>(5, 10100, 10, "test description");
+            ARRAY<double> farr2 = new ARRAY<double>(5, 10101, 10, "test description");
 
             for (int i = 0; i < 10; i++) farr1[i] = 1 / 10.0;
             for (int i = 0; i < 10; i++) farr2[i] = 1 / 20.0;
@@ -251,18 +251,18 @@ namespace FrameWorkUnitTests
             T = farr1;
             T.CopyValues(farr2);
 
-            for (int i = 0; i < 10; i++) Assert.AreEqual((T as FWOArray<double>)[i], farr2[i]);
+            for (int i = 0; i < 10; i++) Assert.AreEqual((T as ARRAY<double>)[i], farr2[i]);
         }
 
         [TestMethod]
         public void FWO_GetValueAsString()
         {
-            FWOBase.ClearAll();
+            RGOBase.ClearAll();
 
             AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
             analogIn1.RawValue = 5.555;
 
-            FWOArray<double> farr1 = new FWOArray<double>(5, 10101, 10, "test description");
+            ARRAY<double> farr1 = new ARRAY<double>(5, 10101, 10, "test description");
             for (int i = 0; i < 10; i++) farr1[i] = 1 / 10.0;
 
             SV<double> sv1 = new SV<double>(1, 10102, "TestDescription");
@@ -273,7 +273,7 @@ namespace FrameWorkUnitTests
             
             EQP<double> eqp1 = new EQP<double>(5, 10104, "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
 
-            FWOBase T = analogIn1;
+            RGOBase T = analogIn1;
             Assert.AreEqual(analogIn1.Value.ToString(), T.GetValueAsString(3));
             Assert.AreNotEqual(analogIn1.Value.ToString(), T.GetValueAsString(2));
             Assert.AreEqual(analogIn1.Value.ToString(), T.GetValueAsString());
@@ -307,14 +307,14 @@ namespace FrameWorkUnitTests
         [TestMethod]
         public void GuiCMD_Copyvalues()
         {
-            FWOBase.ClearAll();
-            GuiCMD cmd = new GuiCMD(5, 10100, Testdelegate, "Test description");
-            GuiCMD cmd2 = new GuiCMD(5, 10101, Testdelegate2, "Test description");
+            RGOBase.ClearAll();
+            CMD cmd = new CMD(5, 10100, Testdelegate, "Test description");
+            CMD cmd2 = new CMD(5, 10101, Testdelegate2, "Test description");
 
             cmd.Args = "X";
             cmd2.Args = "Y";
 
-            FWOBase T = null;
+            RGOBase T = null;
             T = cmd;
             T.CopyValues(cmd2);
 

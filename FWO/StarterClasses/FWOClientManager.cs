@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public enum FWOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnected }
-    public class FWOClientStarter : FWOStarterBase
+
+    public class FWOClientManager : FWOStarterBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //clients
         public static GTLClientServerComm ServerComm { get; private set; }
-        private static GTLClientFWO FWOClient;
+        private static GTLClientFWO FWOClientDownloader;
         private static GTLClientDescriptions DSCClient;
         private static Timer CycleTimer;
         private const int Cycletime = 200;
@@ -25,7 +26,7 @@ namespace FWO
 
         public static void StartClients(int basePortNr, string ServerAddress)
         {
-            FWOBase.RunsOnServer = false;
+            RGOBase.RunsOnServer = false;
 
             if (basePortNr == 0) basePortNr = DefBasePort;
             SetPorts(basePortNr);
@@ -34,7 +35,7 @@ namespace FWO
             ServerComm = new GTLClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
             ServerComm.Start();
 
-            FWOClient = new GTLClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
+            FWOClientDownloader = new GTLClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
             DSCClient = new GTLClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
@@ -57,13 +58,13 @@ namespace FWO
                 if (ServerComm.ServerConnected)
                 {
                     state = FWOStates.DownloadingAllFWO;
-                    FWOClient.Start();
+                    FWOClientDownloader.Start();
                 }
             }
 
             if (state == FWOStates.DownloadingAllFWO)
             {
-                if(FWOClient.FWODownloadDone == true)
+                if(FWOClientDownloader.FWODownloadDone == true)
                 {
                     state = FWOStates.DownloadingDSC;
                     DSCClient.Start();

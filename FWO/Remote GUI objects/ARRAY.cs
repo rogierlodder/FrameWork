@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
-    public class FWOArray<T> : FWOBase where T: IComparable<T>
+    public class ARRAY<T> : RGOBase where T: IComparable<T>
     {
         private T[] _Value;
         public T this[int index] {
@@ -15,12 +15,12 @@ namespace FWO
             set { if (value.CompareTo(_Value[index]) != 0) { _Value[index] = value; MustSerialize = true; } }
         }
 
-        public FWOArray(int modnr, int id, int size, string desc) : base(modnr, id, desc)
+        public ARRAY(int modnr, int id, int size, string desc) : base(modnr, id, desc)
         {
             _Value = new T[size];
         }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             if (newVal == null || _Value == null) return;
             for (int i = 0; i < _Value.Length; i++) _Value[i] = (newVal as dynamic)[i];

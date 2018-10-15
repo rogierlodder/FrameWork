@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
-using FWO;
+using RGO;
 using System.Collections.Generic;
 
-namespace FWO
+namespace RGO
 {
     public class FWOComboBox : ComboBox, IUpdatableControl
     {
@@ -39,8 +39,8 @@ namespace FWO
         private void Init(int modnr, int id)
         {
             ObjectIDs = new List<ObjectID>();
-            ObjectIDs.Add(new ObjectID(FWOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
-            stp = FWOBase.GetFromID(modnr, id) as EnumSTP;
+            ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
+            stp = RGOBase.GetFromID(modnr, id) as EnumSTP;
 
             Options = stp.OptionsString.Split(',');
             ItemsSource = Options;

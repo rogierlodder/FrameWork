@@ -1,4 +1,4 @@
-﻿using FWO;
+﻿using RGO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace FWOClientTests
 
         async void StartApplication()
         {
-            FWOClientStarter.StartClients(45010, "127.0.0.1");
+            FWOClientManager.StartClients(45010, "127.0.0.1");
 
-            await FWOClientStarter.WaitForClientConnectTask();
+            await FWOClientManager.WaitForClientConnectTask();
             log.Info("Client connected to server");
 
             FWORWClient = new GTLClientRW("127.0.0.1", "GTLRWService");
@@ -32,7 +32,7 @@ namespace FWOClientTests
             FWORWClient.Start();
             FWORWClient.CreateWriteList = CreateWriteList;
 
-            await FWOClientStarter.WaitForClientDisconnectTask();
+            await FWOClientManager.WaitForClientDisconnectTask();
             log.Info("Connection to server lost");
         }
 

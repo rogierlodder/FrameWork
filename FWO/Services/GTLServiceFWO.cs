@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FWO
+namespace RGO
 {
     public class GTLServiceFWO : GTLService<RequestAllFWO, ReplyAllFWO>
     {
         log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceFWO");
 
-        List<FWOBase> LocalFWOList = new List<FWOBase>();
+        List<RGOBase> LocalFWOList = new List<RGOBase>();
 
         public GTLServiceFWO(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
             Request = new RequestAllFWO();
             Reply = new ReplyAllFWO();
 
-            LocalFWOList = FWOBase.AllFWO.Select(p => p.Value).ToList();
+            LocalFWOList = RGOBase.AllFWO.Select(p => p.Value).ToList();
         }
 
         public override bool ProcessData()

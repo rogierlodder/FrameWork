@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FWO;
+using RGO;
 using System.Windows.Threading;
 using System.Net;
 using System.Diagnostics;
@@ -64,7 +64,7 @@ namespace FWOTestingApplication
                     ServiceCycleCounter = 0;
                     FWOServiceStarter.Run();
 
-                    for (int i = 10000; i < 10000 + 100; i++) (FWOBase.AllFWO[i * 100] as SV<double>).Value = counter;
+                    for (int i = 10000; i < 10000 + 100; i++) (RGOBase.AllFWO[i * 100] as SV<double>).Value = counter;
                     counter += 0.1;
                 }
                 else ServiceCycleCounter++;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     [Serializable]
     public class RequestAllFWO : FWORequestBase
@@ -18,6 +18,6 @@ namespace FWO
         public int TotalNumber { get; set; }
         public int Index { get; set; }
 
-        public List<FWOBase> FWOBjects;
+        public List<RGOBase> FWOBjects;
     }
 }

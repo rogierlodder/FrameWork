@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     /* The Setpoint class
      * The purpose of this class is to send values and setpoint from the GUI to the Server
      */
     [Serializable]
-    public class STP<T> : FWOBase where T : struct, IComparable<T>
+    public class STP<T> : RGOBase where T : struct, IComparable<T>
     {
         private T _Value;
         public T Value {
@@ -27,7 +27,7 @@ namespace FWO
 
         public STP(int modnr, int id, string desc) : base(modnr, id, desc) { }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             if (newVal == null || this == null) return;
             (this as dynamic)._Value = (newVal as dynamic)._Value;
@@ -45,7 +45,7 @@ namespace FWO
             if (options != "") OptionsString = options.Replace(" ", "");
         }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             base.CopyValues(newVal);
         }

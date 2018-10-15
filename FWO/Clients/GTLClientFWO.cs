@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public class GTLClientFWO : GTLClient<RequestAllFWO, ReplyAllFWO>
     {
@@ -35,7 +35,11 @@ namespace FWO
             //if (Reply.FWOBjects.Count != 0) WaitingForReply = false;
             //else return;
 
-            foreach (var F in Reply.FWOBjects) F.AddToFWOList();
+            foreach (var F in Reply.FWOBjects)
+            {
+                
+                F.AddToFWOList();
+            }
 
             NrReceivedFWO += Reply.FWOBjects.Count;
             Request.RequestIndex += Reply.FWOBjects.Count;

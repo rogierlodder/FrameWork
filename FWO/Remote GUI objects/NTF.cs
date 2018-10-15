@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FWO
+namespace RGO
 {
     public enum ErrLevel { Notification, Warning, Error }
 
     [Serializable]
-    public class NTF : FWOBase
+    public class NTF : RGOBase
     {
         private string _Issuer;
         public string Issuer { get { return _Issuer; } }
@@ -41,7 +41,7 @@ namespace FWO
         private int _userReply;
         public int UserReply { get { return _userReply; } set { } }
 
-        public override void CopyValues(FWOBase newVal)
+        public override void CopyValues(RGOBase newVal)
         {
             NTF ntfTemp = newVal as dynamic;
             if (RunsOnServer)
