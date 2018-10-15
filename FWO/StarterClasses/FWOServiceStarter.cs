@@ -28,7 +28,7 @@ namespace RGF
 
         public static void Run()
         {
-            GTLServiceBase.RunAllServices();
+            RGOServiceBase.RunAllServices();
         }
 
         public static void StartServices(int basePortNr)

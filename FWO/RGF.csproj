@@ -84,8 +84,8 @@
     <Compile Include="Remote GUI objects\SV.cs" />
     <Compile Include="DataExchangeClasses\RequestAllFWO.cs" />
     <Compile Include="DataExchangeClasses\ReadWriteFWO.cs" />
-    <Compile Include="Services\GTLService.cs" />
-    <Compile Include="Services\GTLServiceBase.cs" />
+    <Compile Include="Services\RGOService.cs" />
+    <Compile Include="Services\RGOServiceBase.cs" />
     <Compile Include="Services\GTLServiceDescriptions.cs" />
     <Compile Include="Services\GTLServiceFWO.cs" />
     <Compile Include="Services\GTLServiceNotification.cs" />
@@ -93,7 +93,6 @@
     <Compile Include="Services\GTLServiceServerConn.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

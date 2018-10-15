@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RGF
 {
-    public class GTLServiceFWO : GTLService<RequestAllFWO, ReplyAllFWO>
+    public class GTLServiceFWO : RGOService<RequestAllFWO, ReplyAllFWO>
     {
         log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceFWO");
 

@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public enum FWODownloadStates { Idle, DownLoading, Finished }
-
-    public class ClientConnection : EthernetCommunication.ConnectionBase
+    public class ClientConnection
     {
         public string ConnectionName { get; set; }
         public bool IsLocal { get; set; }
@@ -18,7 +16,6 @@ namespace RGF
         public bool ClientConnected { get; set; } =  false;
         public int ClientDisconnectCounter { get; set; } = -1;
 
-        public FWODownloadStates st { get; set; } = FWODownloadStates.Idle;
         public int Index { get; set; }
         public int BatchSize { get; set; }
 

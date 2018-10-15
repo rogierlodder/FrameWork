@@ -2,11 +2,11 @@
 
 namespace RGF
 {
-    public abstract class GTLServiceBase 
+    public abstract class RGOServiceBase 
     {
         static log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceBase");
 
-        public static List<GTLServiceBase> AllServers { get; protected set; } = new List<GTLServiceBase>();
+        public static List<RGOServiceBase> AllServers { get; protected set; } = new List<RGOServiceBase>();
 
         public static Dictionary<uint, ClientConnection> ClientSessions { get; set; } = new Dictionary<uint, ClientConnection>();
 

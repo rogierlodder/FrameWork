@@ -1,7 +1,7 @@
 ﻿
 namespace RGF
 {
-    public class GTLServiceRW : GTLService<RequestRW, ReplyRW>
+    public class GTLServiceRW : RGOService<RequestRW, ReplyRW>
     {
         public GTLServiceRW(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {

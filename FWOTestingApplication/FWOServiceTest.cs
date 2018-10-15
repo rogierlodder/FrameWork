@@ -54,7 +54,7 @@ namespace FWOTestingApplication
 
         public async void RunServices()
         {
-            log.Debug($"Started servers: {GTLServiceBase.AllServers.Count.ToString()}");
+            log.Debug($"Started servers: {RGOServiceBase.AllServers.Count.ToString()}");
 
             double counter = 0;
             while (true)

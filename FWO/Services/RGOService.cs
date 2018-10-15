@@ -8,12 +8,10 @@ using System.Diagnostics;
 
 namespace RGF
 {
-    public abstract class GTLService<TRequest, TReply> : GTLServiceBase where TRequest : class
+    public abstract class RGOService<TRequest, TReply> : RGOServiceBase where TRequest : class
                                                                         where TReply : class
     {
         log4net.ILog log = log4net.LogManager.GetLogger("GTLService");
-
-
 
         public int NrConnections { get { return server.NrConnections; } }
         public TRequest Request;
@@ -29,13 +27,13 @@ namespace RGF
         private Stopwatch sw = new Stopwatch();
         
 
-        public GTLService(string name, int portNr)
+        public RGOService(string name, int portNr)
         {
             Name = name;
             Setup(portNr);
         }
 
-        public GTLService(string name, int portNr, int bufferSize)
+        public RGOService(string name, int portNr, int bufferSize)
         {
             Name = name;
             clientBuffeSize = bufferSize;

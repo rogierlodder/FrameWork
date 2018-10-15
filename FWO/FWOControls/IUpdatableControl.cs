@@ -12,16 +12,13 @@ namespace RGF
 
     public class ObjectID
     {
-        private int _ID;
-        public int ID { get { return _ID; }  }
-
-        private ElementTypeEnum _Type;
-        public ElementTypeEnum Type { get { return _Type; } }
+        public int ID { get; }
+        public ElementTypeEnum Type { get; }
 
         public ObjectID(int id, ElementTypeEnum type)
         {
-            _ID = id;
-            _Type = type;
+            ID = id;
+            Type = type;
         }
     }
 

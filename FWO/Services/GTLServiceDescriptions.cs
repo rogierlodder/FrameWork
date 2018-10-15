@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RGF
 {
-    public class GTLServiceDescriptions : GTLService<DescriptionRequest, DescriptionReply>
+    public class GTLServiceDescriptions : RGOService<DescriptionRequest, DescriptionReply>
     {
         log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceDescriptions");
 

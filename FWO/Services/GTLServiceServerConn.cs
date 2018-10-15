@@ -2,7 +2,7 @@
 
 namespace RGF
 {
-    public class GTLServiceServerConn : GTLService<CClientInfo, CServerInfo>
+    public class GTLServiceServerConn : RGOService<CClientInfo, CServerInfo>
     {
         protected override void MonitorConnection()
         {
@@ -23,7 +23,7 @@ namespace RGF
                 else
                 {
                     C.Value.ClientDisconnectCounter++;
-                    if (C.Value.ClientDisconnectCounter > GTLServiceBase.DisconnectCount 
+                    if (C.Value.ClientDisconnectCounter > RGOServiceBase.DisconnectCount 
                         && C.Value.ClientConnected == true)
                     {
                         C.Value.ClientConnected = false;
@@ -51,15 +51,15 @@ namespace RGF
 
             if (ClientSessions.ContainsKey(ID) == false)
             {
-                if (ClientSessions.Count < GTLServiceBase.maxNrClients)
+                if (ClientSessions.Count < RGOServiceBase.maxNrClients)
                 {
                     var clientConn = new ClientConnection(ID)
                     {
                         IsLocal = Connection.IsOnLoopback,
-                        BatchSize = GTLServiceBase.LocalBatchsize,
+                        BatchSize = RGOServiceBase.LocalBatchsize,
                         ConnectionName = Connection.Address
                     };
-                    if (!Connection.IsOnLoopback) clientConn.BatchSize = GTLServiceBase.RemoteBatchsize;
+                    if (!Connection.IsOnLoopback) clientConn.BatchSize = RGOServiceBase.RemoteBatchsize;
 
                     ClientSessions.Add(ID, clientConn);
 
