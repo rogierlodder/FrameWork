@@ -1,5 +1,5 @@
 ﻿
-namespace RGO
+namespace RGF
 {
     public class GTLServiceRW : GTLService<RequestRW, ReplyRW>
     {

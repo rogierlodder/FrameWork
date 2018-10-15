@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RGO
+namespace RGF
 {
     public enum ServerPorts
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
-using RGO;
+using RGF;
 
-namespace RGO
+namespace RGF
 {
     public class FWOButton : Button, IUpdatableControl
     {

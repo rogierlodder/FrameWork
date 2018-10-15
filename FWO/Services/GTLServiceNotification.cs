@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 
-namespace RGO
+namespace RGF
 {
     public class GTLServiceNotification : GTLServiceRW
     {

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
-using RGO;
+using RGF;
 using System.Windows.Media;
 
-namespace RGO
+namespace RGF
 {
     public class FWOTextBox : TextBox, IUpdatableControl
     {

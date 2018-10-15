@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
-using RGO;
+using RGF;
 using System.Collections.Generic;
 
-namespace RGO
+namespace RGF
 {
     public class FWOComboBox : ComboBox, IUpdatableControl
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace RGO
+namespace RGF
 {
     //The EQP class
     //EQPs are used by the server.They have default values, but the GUI can overwrite the value.On startup, the server loads the new values set by the GUI.

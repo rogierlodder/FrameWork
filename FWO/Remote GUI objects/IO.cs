@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace RGO
+namespace RGF
 {
 
     /* The purpose of the IO category is to distinguish between values that are measured by the IO system and those that sre measured by external devices like pumps or power supplies */

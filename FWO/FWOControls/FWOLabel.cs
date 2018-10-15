@@ -1,10 +1,10 @@
 ﻿using System.Windows.Controls;
-using RGO;
+using RGF;
 using System.Linq;
 using System.Windows.Media;
 using System.Collections.Generic;
 
-namespace RGO
+namespace RGF
 {
     public class FWOLabel : Label, IUpdatableControl
     {

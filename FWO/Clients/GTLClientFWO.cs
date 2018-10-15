@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace RGO
+namespace RGF
 {
     public class GTLClientFWO : GTLClient<RequestAllFWO, ReplyAllFWO>
     {

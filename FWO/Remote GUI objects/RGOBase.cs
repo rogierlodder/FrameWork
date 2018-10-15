@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace RGO
+namespace RGF
 {
     public enum Units { none, s, mm, mBar, minutes, W, kW, SCCM, SLM, A, mA, mm_per_s, mm_per_s_square, RPM }
 

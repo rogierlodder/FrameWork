@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RGO
+namespace RGF
 {
     /* The Setpoint class
      * The purpose of this class is to send values and setpoint from the GUI to the Server

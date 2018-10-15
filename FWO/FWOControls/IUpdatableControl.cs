@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RGO
+namespace RGF
 {
     public enum ElementTypeEnum { Read, Write, ReadWrite }
 

@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace RGO
+namespace RGF
 {
     public abstract class GTLService<TRequest, TReply> : GTLServiceBase where TRequest : class
                                                                         where TReply : class

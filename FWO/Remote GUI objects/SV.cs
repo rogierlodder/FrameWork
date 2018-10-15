@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RGO
+namespace RGF
 {
     /* The Status variable class
      * Objects of this class are typically only given values by the server and read by the GUI 

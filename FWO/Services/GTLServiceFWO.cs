@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RGO
+namespace RGF
 {
     public class GTLServiceFWO : GTLService<RequestAllFWO, ReplyAllFWO>
     {

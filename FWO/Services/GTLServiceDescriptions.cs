@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RGO
+namespace RGF
 {
     public class GTLServiceDescriptions : GTLService<DescriptionRequest, DescriptionReply>
     {

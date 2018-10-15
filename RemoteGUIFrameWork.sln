@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameWorkUnitTests", "FrameWorkUnitTests\FrameWorkUnitTests.csproj", "{1A64431E-F270-4172-8B02-F9636445D19C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGO", "FWO\RGO.csproj", "{E18EF332-DB01-4DC5-A85F-2308DBAF5275}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGF", "FWO\RGF.csproj", "{E18EF332-DB01-4DC5-A85F-2308DBAF5275}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWOServiceTests", "FWOTestingApplication\FWOServiceTests.csproj", "{AC219A74-FF0B-4D6A-A6E5-EB89C0B08FC1}"
 EndProject

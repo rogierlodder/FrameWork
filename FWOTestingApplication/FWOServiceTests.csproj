@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FWO\RGO.csproj">
+    <ProjectReference Include="..\FWO\RGF.csproj">
       <Project>{e18ef332-db01-4dc5-a85f-2308dbaf5275}</Project>
-      <Name>RGO</Name>
+      <Name>RGF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

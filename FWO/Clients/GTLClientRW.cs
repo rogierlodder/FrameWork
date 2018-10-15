@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RGO
+namespace RGF
 {
     public class GTLClientRW : GTLClient<RequestRW, ReplyRW>
     {
