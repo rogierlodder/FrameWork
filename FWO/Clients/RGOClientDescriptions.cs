@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class GTLClientDescriptions : GTLClient<DescriptionRequest, DescriptionReply>
+    public class RGOClientDescriptions : RGOClient<DescriptionRequest, DescriptionReply>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("GTLClientDescriptions");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOClientDescriptions");
 
         public bool DSCsReceived { get; private set; } = false;
         private int NrReceivedDSC = 0;
@@ -18,7 +18,7 @@ namespace RGF
             });
         }
 
-        public GTLClientDescriptions(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
+        public RGOClientDescriptions(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
         {
             if (ClientID == 0)
             {
@@ -48,10 +48,10 @@ namespace RGF
             {
                 foreach (var F in Reply.Descriptions)
                 {
-                    RGOBase.AllFWO[F.Key].Description = F.Value;
+                    RGOBase.AllRGO[F.Key].Description = F.Value;
                 }
             }
-            catch { throw new Exception("Unknown FWO received on the Description service"); }
+            catch { throw new Exception("Unknown RGO received on the Description service"); }
 
             NrReceivedDSC += Reply.Descriptions.Count;
             Request.RequestIndex += Reply.Descriptions.Count;
@@ -62,7 +62,7 @@ namespace RGF
             {
                 DSCsReceived = true;
 
-                //the description service only has to run once. It will not poll the entire FWO list
+                //the description service only has to run once. It will not poll the entire RGO list
                 Running = false;
             }
         }

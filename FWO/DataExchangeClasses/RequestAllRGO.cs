@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace RGF
 {
     [Serializable]
-    public class RequestAllFWO : FWORequestBase
+    public class RequestAllRGO : RGORequestBase
     {
         public int RequestIndex;
     }
 
     [Serializable]
-    public class ReplyAllFWO
+    public class ReplyAllRGO
     {
         public int TotalNumber { get; set; }
         public int Index { get; set; }

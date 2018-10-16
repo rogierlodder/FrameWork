@@ -5,7 +5,7 @@ using RGF;
 namespace FrameWorkUnitTests
 {
     [TestClass]
-    public class FWOTests
+    public class RGOTests
     {
         [TestMethod]
         public void EQP_double_CopyValues_test()

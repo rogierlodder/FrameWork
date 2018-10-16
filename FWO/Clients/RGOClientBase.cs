@@ -13,13 +13,13 @@ namespace RGF
         NotificationService = 45015
     }
 
-    public abstract class GTLClientBase 
+    public abstract class RGOClientBase 
     {
         public static uint ClientID { get; protected set; }
 
         public string Name { get; protected set; }
 
-        public static List<GTLClientBase> AllClients { get; protected set; } = new List<GTLClientBase>();
+        public static List<RGOClientBase> AllClients { get; protected set; } = new List<RGOClientBase>();
 
         public abstract void Run();
     }

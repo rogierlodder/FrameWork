@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RGF
 {
-    public class FWOComboBox : ComboBox, IUpdatableControl
+    public class RGOComboBox : ComboBox, IUpdatableControl
     {
         EnumSTP stp;
 
@@ -63,7 +63,7 @@ namespace RGF
             IsEnabled = stp.CanSetValue;
         }
 
-        public FWOComboBox()
+        public RGOComboBox()
         {
             SelectionChanged += NewSelection;
         }

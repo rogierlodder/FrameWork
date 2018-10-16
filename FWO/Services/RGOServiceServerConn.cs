@@ -2,7 +2,7 @@
 
 namespace RGF
 {
-    public class GTLServiceServerConn : RGOService<CClientInfo, CServerInfo>
+    public class RGOServiceServerConn : RGOService<CClientInfo, ServerInfo>
     {
         protected override void MonitorConnection()
         {
@@ -17,7 +17,7 @@ namespace RGF
                     {
                         C.Value.ClientConnected = true;
 
-                        FWOServiceStarter.ConnStateChanged?.Invoke(true, C.Key);
+                        RGOServiceStarter.ConnStateChanged?.Invoke(true, C.Key);
                     }
                 }
                 else
@@ -28,7 +28,7 @@ namespace RGF
                     {
                         C.Value.ClientConnected = false;
 
-                        FWOServiceStarter.ConnStateChanged?.Invoke(false, C.Key);
+                        RGOServiceStarter.ConnStateChanged?.Invoke(false, C.Key);
                         C.Value.ClientDisconnectCounter = 0;
 
                         //signal that this client is no longer connected and can be erased from existence
@@ -38,10 +38,10 @@ namespace RGF
             }
         }
 
-        public GTLServiceServerConn(string name, int portNr) : base(name, portNr)
+        public RGOServiceServerConn(string name, int portNr) : base(name, portNr)
         {
             Request = new CClientInfo();
-            Reply = new CServerInfo();
+            Reply = new ServerInfo();
         }
 
 
@@ -73,7 +73,7 @@ namespace RGF
 
                 Reply.SetTime();
                 Reply.SessionCounter++;
-                Reply.CycleTime = FWOServiceStarter.MeasuredCycleTime;
+                Reply.CycleTime = RGOServiceStarter.MeasuredCycleTime;
             }
 
             return true;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RGF
 {
     [Serializable]
-    public class FWORequestBase
+    public class RGORequestBase
     {
         public uint ClientID = 0;
     }

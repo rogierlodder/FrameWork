@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace RGF
 {
     [Serializable]
-    public class DescriptionRequest : FWORequestBase
+    public class DescriptionRequest : RGORequestBase
     {
         public int RequestIndex;
     }

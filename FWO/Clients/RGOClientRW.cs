@@ -2,14 +2,14 @@
 
 namespace RGF
 {
-    public class GTLClientRW : GTLClient<RequestRW, ReplyRW>
+    public class RGOClientRW : RGOClient<RequestRW, ReplyRW>
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("GTLClientRW");
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger("RGOClientRW");
 
         public delegate void CreateWriteListDelegate();
         public CreateWriteListDelegate CreateWriteList;
 
-        public GTLClientRW(string IPAddress, string serviceName) : base(IPAddress, FWOStarterBase.RWServicePort, serviceName)
+        public RGOClientRW(string IPAddress, string serviceName) : base(IPAddress, RGOStarterBase.RWServicePort, serviceName)
         {
             if (ClientID == 0)
             {
@@ -36,8 +36,8 @@ namespace RGF
             foreach (var F in Reply.FWOList)
             {
                 int id = F.ID;
-                RGOBase.AllFWO[id].CopyValues(F);
-                RGOBase.AllFWO[id].Update?.Invoke();
+                RGOBase.AllRGO[id].CopyValues(F);
+                RGOBase.AllRGO[id].Update?.Invoke();
             }
         }
     }

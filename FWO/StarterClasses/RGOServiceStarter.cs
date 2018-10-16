@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class FWOServiceStarter : FWOStarterBase
+    public class RGOServiceStarter : RGOStarterBase
     {
         //Services
-        private static GTLServiceServerConn ServerConn;
-        private static GTLServiceFWO FWOConn;
-        private static GTLServiceRW RWService;
-        private static GTLServiceDescriptions DescriptionService;
-        private static GTLServiceNotification Notificationservice;
+        private static RGOServiceServerConn ServerConn;
+        private static RGOServiceFWO FWOConn;
+        private static RGOServiceRW RWService;
+        private static RGOServiceDescriptions DescriptionService;
+        private static RGOServiceNotification Notificationservice;
 
         public delegate void ConnStateChangedDelegate(bool connected, uint ID);
         public static ConnStateChangedDelegate ConnStateChanged;
@@ -39,11 +39,11 @@ namespace RGF
             SetPorts(basePortNr);
 
             //Start the Services
-            ServerConn = new GTLServiceServerConn("ServerCommService", ServerCommServicePort);
-            FWOConn = new GTLServiceFWO("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
-            RWService = new GTLServiceRW("RWService", RWServicePort, RWServiceBufSize);
-            DescriptionService = new GTLServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
-            Notificationservice = new GTLServiceNotification("NotificationService", NotificationServicePort, NotifServiceBufSize);
+            ServerConn = new RGOServiceServerConn("ServerCommService", ServerCommServicePort);
+            FWOConn = new RGOServiceFWO("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
+            RWService = new RGOServiceRW("RWService", RWServicePort, RWServiceBufSize);
+            DescriptionService = new RGOServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
+            Notificationservice = new RGOServiceNotification("NotificationService", NotificationServicePort, NotifServiceBufSize);
         }
 
         

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RGF
 {
     [Serializable]
-    public class RequestRW : FWORequestBase
+    public class RequestRW : RGORequestBase
     {
         public List<int> ReqList = new List<int>();
         public List<RGOBase> WriteList = new List<RGOBase>();

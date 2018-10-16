@@ -5,7 +5,7 @@ using RGF;
 
 namespace RGF
 {
-    public class FWOButton : Button, IUpdatableControl
+    public class RGOButton : Button, IUpdatableControl
     {
         private CMD command;
 
@@ -61,7 +61,7 @@ namespace RGF
             if (command != null) command.Args = CommandString;
         }
 
-        public FWOButton()
+        public RGOButton()
         {
             Click += ButtonPressed;
         }

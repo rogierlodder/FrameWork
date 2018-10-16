@@ -11,7 +11,7 @@ namespace RGF
     public abstract class RGOService<TRequest, TReply> : RGOServiceBase where TRequest : class
                                                                         where TReply : class
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("GTLService");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOService");
 
         public int NrConnections { get { return server.NrConnections; } }
         public TRequest Request;
@@ -49,7 +49,7 @@ namespace RGF
             }
             catch
             {
-                log.Error($"The name:{Name} does not occur in the GTLSerice list in the configuration ");
+                log.Error($"The name:{Name} does not occur in the RGOSerice list in the configuration ");
             }
             AllServers.Add(this);
         }

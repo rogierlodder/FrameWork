@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RGF
 {
-    public class FWOLabel : Label, IUpdatableControl
+    public class RGOlabel : Label, IUpdatableControl
     {
         private RGOBase FWObject;
 
@@ -57,7 +57,7 @@ namespace RGF
                 transitionString = (ControlsHelper.RemoveSpaces(Transition)).Split(',');
 
                 if (Error != "" || On != "" || Transition != "") IsStatusVariableString = true;
-                //add this element to the list of all elementrs so that the request and reply classes can be created for the GTLServices
+                //add this element to the list of all elementrs so that the request and reply classes can be created for the RGOServices
                 UDC.AllControls.Add(this);
 
                 //subscribe to the update delegate of the FWObject

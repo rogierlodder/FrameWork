@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace RGF
 {
-    public class GTLServiceFWO : RGOService<RequestAllFWO, ReplyAllFWO>
+    public class RGOServiceFWO : RGOService<RequestAllRGO, ReplyAllRGO>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceFWO");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceFWO");
 
         List<RGOBase> LocalFWOList = new List<RGOBase>();
 
-        public GTLServiceFWO(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
+        public RGOServiceFWO(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
-            Request = new RequestAllFWO();
-            Reply = new ReplyAllFWO();
+            Request = new RequestAllRGO();
+            Reply = new ReplyAllRGO();
 
-            LocalFWOList = RGOBase.AllFWO.Select(p => p.Value).ToList();
+            LocalFWOList = RGOBase.AllRGO.Select(p => p.Value).ToList();
         }
 
         public override bool ProcessData()

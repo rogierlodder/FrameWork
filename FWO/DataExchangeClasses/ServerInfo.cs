@@ -3,13 +3,13 @@
 namespace RGF
 {
     [Serializable]
-    public class CClientInfo : FWORequestBase
+    public class CClientInfo : RGORequestBase
     {
         public long Counter;
     }
 
     [Serializable]
-    public class CServerInfo
+    public class ServerInfo
     {
         public bool ConnectionAccepted { get; set; }
 

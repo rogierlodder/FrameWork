@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace RGF
 {
-    public abstract class GTLClient<TRequest, TReply> : GTLClientBase where TRequest : class
+    public abstract class RGOClient<TRequest, TReply> : RGOClientBase where TRequest : class
                                                                       where TReply : class
     {
         public TRequest Request { get;  set; }
@@ -27,12 +27,12 @@ namespace RGF
         protected bool Running = false;
         protected bool WaitingForReply = false;
 
-        private log4net.ILog log = log4net.LogManager.GetLogger("GTLClient<>");
+        private log4net.ILog log = log4net.LogManager.GetLogger("RGOClient<>");
         private MemoryStream memStream = new MemoryStream();
         private BinaryFormatter formatter = new BinaryFormatter();
         private Stopwatch sw = new Stopwatch();
 
-        public GTLClient(string IPAddress, int portNr, string serviceName)
+        public RGOClient(string IPAddress, int portNr, string serviceName)
         {
             Name = serviceName;
             try
@@ -45,7 +45,7 @@ namespace RGF
             }
             catch
             {
-                log.Error($"GTLClientBase: The name:{Name} does not occur in the GTLService list in the configuration ");
+                log.Error($"RGOClientBase: The name:{Name} does not occur in the RGOService list in the configuration ");
             }
             AllClients.Add(this);
         }

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class GTLClientNotifications : GTLClientRW
+    public class RGOClientNotifications : RGOClientRW
     {
         bool NotifReceived = false;
 
-        public GTLClientNotifications(string IPAddress, string serviceName) : base(IPAddress, serviceName)
+        public RGOClientNotifications(string IPAddress, string serviceName) : base(IPAddress, serviceName)
         {
             if (ClientID == 0)
             {

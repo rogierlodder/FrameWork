@@ -3,28 +3,28 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class GTLClientFWO : GTLClient<RequestAllFWO, ReplyAllFWO>
+    public class RGOClientFWO : RGOClient<RequestAllRGO, ReplyAllRGO>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("GTLClientFWO");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOClientFWO");
 
-        public bool FWODownloadDone { get; private set; } = false;
+        public bool RGODownloadDone { get; private set; } = false;
 
         private int NrReceivedFWO = 0;
 
-        public GTLClientFWO(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
+        public RGOClientFWO(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
         {
             if (ClientID == 0)
             {
                 throw new Exception("The client ID is undefined");
             }
 
-            Reply = new ReplyAllFWO();
+            Reply = new ReplyAllRGO();
 
-            Request = new RequestAllFWO();
+            Request = new RequestAllRGO();
 
             Request.ClientID = ClientID;
             Request.RequestIndex = 0;
-            FWODownloadDone = false;
+            RGODownloadDone = false;
         }
 
         protected override void CreateRequest() { }
@@ -44,13 +44,13 @@ namespace RGF
             NrReceivedFWO += Reply.FWOBjects.Count;
             Request.RequestIndex += Reply.FWOBjects.Count;
 
-            log.Debug($"number of received FWO {NrReceivedFWO}");
+            log.Debug($"number of received RGO {NrReceivedFWO}");
 
             if (NrReceivedFWO >= Reply.TotalNumber)
             {
-                FWODownloadDone = true;
+                RGODownloadDone = true;
 
-                //the FWO service only has to run once. It will not poll the entire FWO list
+                //the RGO service only has to run once. It will not poll the entire RGO list
                 Running = false;
             }
 

@@ -10,14 +10,14 @@ using System.Diagnostics;
 
 namespace FWOTestingApplication
 {
-    class FWOServiceTest
+    class RGOServiceTest
     {
         log4net.ILog log = log4net.LogManager.GetLogger("FWOServiceTest");
 
         const int ServiceCycleInterval = 1;
         private int ServiceCycleCounter = 0;
 
-        public void CreateFWO(int nr)
+        public void CreateRGO(int nr)
         {
             int id = 10000;
             for (int i=0; i < nr; i ++)
@@ -62,9 +62,9 @@ namespace FWOTestingApplication
                 if (ServiceCycleCounter >= ServiceCycleInterval)
                 {
                     ServiceCycleCounter = 0;
-                    FWOServiceStarter.Run();
+                    RGOServiceStarter.Run();
 
-                    for (int i = 10000; i < 10000 + 100; i++) (RGOBase.AllFWO[i * 100] as SV<double>).Value = counter;
+                    for (int i = 10000; i < 10000 + 100; i++) (RGOBase.AllRGO[i * 100] as SV<double>).Value = counter;
                     counter += 0.1;
                 }
                 else ServiceCycleCounter++;
@@ -75,19 +75,19 @@ namespace FWOTestingApplication
 
         public void StartServices()
         {
-            //create FWO objects for testing
-            CreateFWO(200);
+            //create RGO objects for testing
+            CreateRGO(200);
 
             //Start the Services
-            FWOServiceStarter.ConnStateChanged = ConnStateChanged;
-            FWOServiceStarter.StartServices(basePortNr: 45010);
+            RGOServiceStarter.ConnStateChanged = ConnStateChanged;
+            RGOServiceStarter.StartServices(basePortNr: 45010);
         }
 
 
 
         static void Main(string[] args)
         {
-            FWOServiceTest p = new FWOServiceTest();
+            RGOServiceTest p = new RGOServiceTest();
 
             p.StartServices();
             p.RunServices();

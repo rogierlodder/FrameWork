@@ -56,7 +56,7 @@ namespace RGF
         [NonSerialized]
         public string Description;
 
-        static public Dictionary<int, RGOBase> AllFWO = new Dictionary<int, RGOBase>();
+        static public Dictionary<int, RGOBase> AllRGO = new Dictionary<int, RGOBase>();
 
         /// <summary>
         /// Contructor
@@ -74,36 +74,36 @@ namespace RGF
 
         public static void AddClientID(uint ID)
         {
-            foreach (var F in AllFWO.Values) F.MustSerializeDict.Add(ID, true);
+            foreach (var F in AllRGO.Values) F.MustSerializeDict.Add(ID, true);
         }
 
         public static void RemoveClientID(uint ID)
         {
-            foreach (var F in AllFWO.Values) F.MustSerializeDict.Remove(ID);
+            foreach (var F in AllRGO.Values) F.MustSerializeDict.Remove(ID);
         }
 
 
         /// <summary>
-        /// Clear the FWO list. Used by the GUI
+        /// Clear the RGO list. Used by the GUI
         /// </summary>
         public static void ClearAll()
         {
-            AllFWO.Clear();
+            AllRGO.Clear();
         }
 
         /// <summary>
-        /// Get a reference to an FWO object from the full ID
+        /// Get a reference to an RGO object from the full ID
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         public static RGOBase GetFromID(int ID)
         {
-            if (AllFWO.ContainsKey(ID)) return AllFWO[ID]; else return null;
+            if (AllRGO.ContainsKey(ID)) return AllRGO[ID]; else return null;
         }
 
         public static RGOBase GetFromID(int modnr, int ID)
         {
-            if (AllFWO.ContainsKey(CalcID(modnr,  ID))) return AllFWO[CalcID(modnr, ID)]; else return null;
+            if (AllRGO.ContainsKey(CalcID(modnr,  ID))) return AllRGO[CalcID(modnr, ID)]; else return null;
         }
 
         public static int CalcID(int modnr, int id)
@@ -113,17 +113,17 @@ namespace RGF
 
 
         /// <summary>
-        /// Add a new FWO to the static list
+        /// Add a new RGO to the static list
         /// </summary>
         public void AddToFWOList()
         {
-            if (AllFWO.ContainsKey(ID))
+            if (AllRGO.ContainsKey(ID))
             {
                 throw new Exception($"A FrameWorkVariable with this key {ID} already exists");
             }
             else
             {
-                AllFWO.Add(ID, this);
+                AllRGO.Add(ID, this);
             }
         }
 
@@ -134,7 +134,7 @@ namespace RGF
         public abstract void CopyValues(RGOBase newVal);
 
         /// <summary>
-        /// Get the value of the FWO as a string
+        /// Get the value of the RGO as a string
         /// </summary>
         /// <returns></returns>
         public string GetValueAsString()
@@ -148,7 +148,7 @@ namespace RGF
         }
 
         /// <summary>
-        /// Get the value of a FWO values as a string when it is known that the FWO has a double type
+        /// Get the value of a RGO values as a string when it is known that the RGO has a double type
         /// </summary>
         /// <param name="nrDigits"></param>
         /// <returns></returns>
@@ -168,7 +168,7 @@ namespace RGF
         /// </summary>
         public static void SetAllToMustSerialize()
         {
-            foreach (var F in AllFWO) F.Value.MustSerialize = true;
+            foreach (var F in AllRGO) F.Value.MustSerialize = true;
         }
 
   

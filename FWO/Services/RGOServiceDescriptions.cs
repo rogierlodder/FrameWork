@@ -5,20 +5,20 @@ using System.Linq;
 
 namespace RGF
 {
-    public class GTLServiceDescriptions : RGOService<DescriptionRequest, DescriptionReply>
+    public class RGOServiceDescriptions : RGOService<DescriptionRequest, DescriptionReply>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceDescriptions");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceDescriptions");
 
         Dictionary<int, string> LocalDict = new Dictionary<int, string>();
         List<int> IDList = new List<int>();
 
-        public GTLServiceDescriptions(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
+        public RGOServiceDescriptions(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
             Request = new DescriptionRequest();
             Reply = new DescriptionReply();
 
-            LocalDict = RGOBase.AllFWO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
-            IDList = RGOBase.AllFWO.Select(p => p.Value.ID).ToList();
+            LocalDict = RGOBase.AllRGO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
+            IDList = RGOBase.AllRGO.Select(p => p.Value.ID).ToList();
         }
 
         public override bool ProcessData()

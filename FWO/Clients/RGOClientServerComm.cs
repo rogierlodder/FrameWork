@@ -4,7 +4,7 @@ using System;
 
 namespace RGF
 {
-    public class GTLClientServerComm : GTLClient<CClientInfo, CServerInfo>
+    public class RGOClientServerComm : RGOClient<CClientInfo, ServerInfo>
     {
         private static log4net.ILog log;
         public const int ServerConnectionTimeoutCycles = 8;
@@ -15,16 +15,16 @@ namespace RGF
         public long ServerCommCounter = 0;
         private int ServerDisconnectCounter = -1;
 
-        public GTLClientServerComm(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
+        public RGOClientServerComm(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
         {
             log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType + "_"  + serviceName);
 
             if (ClientID != 0)
             {
-                throw new Exception("A GTLClientServerComm has already been created. Only one FWO client is allowed per process");
+                throw new Exception("A RGOClientServerComm has already been created. Only one RGO client is allowed per process");
             }
             Request = new CClientInfo();
-            Reply = new CServerInfo();
+            Reply = new ServerInfo();
 
             //generate "random" ClientID
             ClientID = (uint)DateTime.Now.ToBinary();

@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public enum FWOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnected }
+    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnected }
 
-    public class FWOClientManager : FWOStarterBase
+    public class RGOClientManager : RGOStarterBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //clients
-        public static GTLClientServerComm ServerComm { get; private set; }
-        private static GTLClientFWO FWOClientDownloader;
-        private static GTLClientDescriptions DSCClient;
+        public static RGOClientServerComm ServerComm { get; private set; }
+        private static RGOClientFWO RGOClientDownloader;
+        private static RGOClientDescriptions DSCClient;
         private static Timer CycleTimer;
         private const int Cycletime = 200;
 
-        public static GTLClientNotifications NotifClient;
+        public static RGOClientNotifications NotifClient;
         public static bool ClientHasStarted  { get; private set; } = false;
-        public static FWOStates state { get; private set; }
+        public static RGOStates state { get; private set; }
 
         public static void StartClients(int basePortNr, string ServerAddress)
         {
@@ -32,11 +32,11 @@ namespace RGF
             SetPorts(basePortNr);
 
             //start the Clients
-            ServerComm = new GTLClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
+            ServerComm = new RGOClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
             ServerComm.Start();
 
-            FWOClientDownloader = new GTLClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
-            DSCClient = new GTLClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
+            RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
+            DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
             CycleTimer.Change(0, Cycletime);
@@ -45,47 +45,47 @@ namespace RGF
         private static void Run(object o)
         {
             //run the state machines of all clients
-            for (int i=0; i< GTLClientBase.AllClients.Count; i++)
+            for (int i=0; i< RGOClientBase.AllClients.Count; i++)
             {
-                GTLClientBase.AllClients[i].Run();
+                RGOClientBase.AllClients[i].Run();
             }
             //monitor the server connection
             ServerComm.MonitorConnection();
 
             //state machine
-            if (state == FWOStates.ConnectingToServer)
+            if (state == RGOStates.ConnectingToServer)
             {
                 if (ServerComm.ServerConnected)
                 {
-                    state = FWOStates.DownloadingAllFWO;
-                    FWOClientDownloader.Start();
+                    state = RGOStates.DownloadingAllFWO;
+                    RGOClientDownloader.Start();
                 }
             }
 
-            if (state == FWOStates.DownloadingAllFWO)
+            if (state == RGOStates.DownloadingAllFWO)
             {
-                if(FWOClientDownloader.FWODownloadDone == true)
+                if(RGOClientDownloader.RGODownloadDone == true)
                 {
-                    state = FWOStates.DownloadingDSC;
+                    state = RGOStates.DownloadingDSC;
                     DSCClient.Start();
                 }
             }
 
-            if (state == FWOStates.DownloadingDSC)
+            if (state == RGOStates.DownloadingDSC)
             {
                 if (DSCClient.DSCsReceived == true)
                 {
-                    state = FWOStates.Running;
-                    log.Info("All FWO downloads done");
+                    state = RGOStates.Running;
+                    log.Info("All RGO downloads done");
                 }
             }
 
-            if (state == FWOStates.Running)
+            if (state == RGOStates.Running)
             {
-                if (ServerComm.ServerConnected == false) state = FWOStates.Disconnected;
+                if (ServerComm.ServerConnected == false) state = RGOStates.Disconnected;
             }
 
-            if (state == FWOStates.Disconnected)
+            if (state == RGOStates.Disconnected)
             {
 
             }
@@ -95,7 +95,7 @@ namespace RGF
         {
             return Task.Run(() => 
             {
-                while (state != FWOStates.Running)
+                while (state != RGOStates.Running)
                 {
                     Thread.Sleep(100);
                 }
@@ -107,7 +107,7 @@ namespace RGF
         {
             return Task.Run(() =>
             {
-                while (state != FWOStates.Disconnected)
+                while (state != RGOStates.Disconnected)
                 {
                     Thread.Sleep(100);
                 }

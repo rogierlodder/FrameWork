@@ -9,10 +9,10 @@ using log4net;
 
 namespace FWOClientTests
 {
-    public class FWOClientTest
+    public class RGOClientTest
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        GTLClientRW FWORWClient;
+        RGOClientRW FWORWClient;
 
         void CreateWriteList()
         {
@@ -21,25 +21,25 @@ namespace FWOClientTests
 
         async void StartApplication()
         {
-            FWOClientManager.StartClients(45010, "127.0.0.1");
+            RGOClientManager.StartClients(45010, "127.0.0.1");
 
-            await FWOClientManager.WaitForClientConnectTask();
+            await RGOClientManager.WaitForClientConnectTask();
             log.Info("Client connected to server");
 
-            FWORWClient = new GTLClientRW("127.0.0.1", "GTLRWService");
+            FWORWClient = new RGOClientRW("127.0.0.1", "RGORWService");
             for (int i = 10000; i < 10000 + 100; i++) FWORWClient.Request.ReqList.Add(i * 100);
 
             FWORWClient.Start();
             FWORWClient.CreateWriteList = CreateWriteList;
 
-            await FWOClientManager.WaitForClientDisconnectTask();
+            await RGOClientManager.WaitForClientDisconnectTask();
             log.Info("Connection to server lost");
         }
 
         static void Main(string[] args)
         {
             log.Info("Application started");
-            FWOClientTest p = new FWOClientTest();
+            RGOClientTest p = new RGOClientTest();
 
             p.StartApplication();
             Console.ReadLine();

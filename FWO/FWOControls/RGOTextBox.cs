@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace RGF
 {
-    public class FWOTextBox : TextBox, IUpdatableControl
+    public class RGOTextBox : TextBox, IUpdatableControl
     {
         private RGOBase stp;
         private RGOBase MinEQP, MaxEQP;
@@ -136,7 +136,7 @@ namespace RGF
             }
         }
 
-        public FWOTextBox()
+        public RGOTextBox()
         {
             //inspect the STP
             HorizontalContentAlignment = HorizontalAlignment.Right;

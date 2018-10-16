@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class FWOStarterBase
+    public class RGOStarterBase
     {
         public const int DefBasePort = 45010;
 

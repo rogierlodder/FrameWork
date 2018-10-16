@@ -54,25 +54,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FWOControls\ControlsHelper.cs" />
-    <Compile Include="FWOControls\FWOButton.cs" />
-    <Compile Include="FWOControls\FWOComboBox.cs" />
-    <Compile Include="FWOControls\FWOLabel.cs" />
-    <Compile Include="FWOControls\FWOTextBox.cs" />
+    <Compile Include="FWOControls\RGOButton.cs" />
+    <Compile Include="FWOControls\RGOComboBox.cs" />
+    <Compile Include="FWOControls\RGOLabel.cs" />
+    <Compile Include="FWOControls\RGOTextBox.cs" />
     <Compile Include="FWOControls\IUpdatableControl.cs" />
-    <Compile Include="StarterClasses\FWOClientManager.cs" />
-    <Compile Include="StarterClasses\FWOServiceStarter.cs" />
-    <Compile Include="StarterClasses\FWOStarterBase.cs" />
+    <Compile Include="StarterClasses\RGOClientManager.cs" />
+    <Compile Include="StarterClasses\RGOServiceStarter.cs" />
+    <Compile Include="StarterClasses\RGOStarterBase.cs" />
     <Compile Include="Services\ClientConnection.cs" />
-    <Compile Include="Clients\GTLClient.cs" />
-    <Compile Include="Clients\GTLClientBase.cs" />
-    <Compile Include="Clients\GTLClientDescriptions.cs" />
-    <Compile Include="Clients\GTLClientFWO.cs" />
-    <Compile Include="Clients\GTLClientNotifications.cs" />
-    <Compile Include="Clients\GTLClientRW.cs" />
-    <Compile Include="Clients\GTLClientServerComm.cs" />
-    <Compile Include="DataExchangeClasses\CServerInfo.cs" />
+    <Compile Include="Clients\RGOClient.cs" />
+    <Compile Include="Clients\RGOClientBase.cs" />
+    <Compile Include="Clients\RGOClientDescriptions.cs" />
+    <Compile Include="Clients\RGOClientFWO.cs" />
+    <Compile Include="Clients\RGOClientNotifications.cs" />
+    <Compile Include="Clients\RGOClientRW.cs" />
+    <Compile Include="Clients\RGOClientServerComm.cs" />
+    <Compile Include="DataExchangeClasses\ServerInfo.cs" />
     <Compile Include="DataExchangeClasses\DescriptionService.cs" />
-    <Compile Include="DataExchangeClasses\FWORequestBase.cs" />
+    <Compile Include="DataExchangeClasses\RGORequestBase.cs" />
     <Compile Include="Remote GUI objects\EQP.cs" />
     <Compile Include="Remote GUI objects\ARRAY.cs" />
     <Compile Include="Remote GUI objects\RGOBase.cs" />
@@ -82,15 +82,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remote GUI objects\STP.cs" />
     <Compile Include="Remote GUI objects\SV.cs" />
-    <Compile Include="DataExchangeClasses\RequestAllFWO.cs" />
-    <Compile Include="DataExchangeClasses\ReadWriteFWO.cs" />
+    <Compile Include="DataExchangeClasses\RequestAllRGO.cs" />
+    <Compile Include="DataExchangeClasses\ReadWriteRGO.cs" />
     <Compile Include="Services\RGOService.cs" />
     <Compile Include="Services\RGOServiceBase.cs" />
-    <Compile Include="Services\GTLServiceDescriptions.cs" />
-    <Compile Include="Services\GTLServiceFWO.cs" />
-    <Compile Include="Services\GTLServiceNotification.cs" />
-    <Compile Include="Services\GTLServiceRW.cs" />
-    <Compile Include="Services\GTLServiceServerConn.cs" />
+    <Compile Include="Services\RGOServiceDescriptions.cs" />
+    <Compile Include="Services\RGOServiceFWO.cs" />
+    <Compile Include="Services\RGOServiceNotification.cs" />
+    <Compile Include="Services\RGOServiceRW.cs" />
+    <Compile Include="Services\RGOServiceServerConn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

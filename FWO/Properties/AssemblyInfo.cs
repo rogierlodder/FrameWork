@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
-[assembly: AssemblyTitle("FWO")]
+[assembly: AssemblyTitle("RGF")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FWO")]
+//[assembly: AssemblyProduct("RGF")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

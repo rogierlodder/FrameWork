@@ -4,7 +4,7 @@ namespace RGF
 {
     public abstract class RGOServiceBase 
     {
-        static log4net.ILog log = log4net.LogManager.GetLogger("GTLServiceBase");
+        static log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceBase");
 
         public static List<RGOServiceBase> AllServers { get; protected set; } = new List<RGOServiceBase>();
 
@@ -34,7 +34,7 @@ namespace RGF
                     log.Debug($"Client {connName} was removed from the client list");
                     Server.RemoveClient(connName);
                 }
-                //remove the client from the FWO elements
+                //remove the client from the RGO elements
                 ClientSessions[ClientID].DeleteFWORef(ClientID);
                 
 

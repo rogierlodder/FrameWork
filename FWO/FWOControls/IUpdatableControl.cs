@@ -24,7 +24,7 @@ namespace RGF
 
     public interface IUpdatableControl
     {
-        //the list of FWO IDs used in the control
+        //the list of RGO IDs used in the control
         List<ObjectID> ObjectIDs { get; }
 
         int ID { get;  }
