@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace RGF
 {
-    public class RGOServiceFWO : RGOService<RequestAllRGO, ReplyAllRGO>
+    public class RGOServiceTransfer : RGOService<RequestAllRGO, ReplyAllRGO>
     {
         log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceFWO");
 
         List<RGOBase> LocalFWOList = new List<RGOBase>();
 
-        public RGOServiceFWO(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
+        public RGOServiceTransfer(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
             Request = new RequestAllRGO();
             Reply = new ReplyAllRGO();

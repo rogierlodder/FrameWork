@@ -10,7 +10,7 @@ namespace RGF
     {
         //Services
         private static RGOServiceServerConn ServerConn;
-        private static RGOServiceFWO FWOConn;
+        private static RGOServiceTransfer FWOConn;
         private static RGOServiceRW RWService;
         private static RGOServiceDescriptions DescriptionService;
         private static RGOServiceNotification Notificationservice;
@@ -40,7 +40,7 @@ namespace RGF
 
             //Start the Services
             ServerConn = new RGOServiceServerConn("ServerCommService", ServerCommServicePort);
-            FWOConn = new RGOServiceFWO("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
+            FWOConn = new RGOServiceTransfer("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
             RWService = new RGOServiceRW("RWService", RWServicePort, RWServiceBufSize);
             DescriptionService = new RGOServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
             Notificationservice = new RGOServiceNotification("NotificationService", NotificationServicePort, NotifServiceBufSize);

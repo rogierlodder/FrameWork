@@ -25,7 +25,6 @@ namespace RGF
         private CEthernetServer<ConnectionBase> server;
         private int clientBuffeSize = 65536;
         private Stopwatch sw = new Stopwatch();
-        
 
         public RGOService(string name, int portNr)
         {

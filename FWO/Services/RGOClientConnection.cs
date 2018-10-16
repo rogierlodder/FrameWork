@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class ClientConnection
+    public class RGOClientConnection
     {
         public string ConnectionName { get; set; }
         public bool IsLocal { get; set; }
@@ -19,7 +19,7 @@ namespace RGF
         public int Index { get; set; }
         public int BatchSize { get; set; }
 
-        public ClientConnection(uint ID)
+        public RGOClientConnection(uint ID)
         {
             RGOBase.AddClientID(ID);
         }

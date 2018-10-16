@@ -53,7 +53,7 @@ namespace RGF
             {
                 if (ClientSessions.Count < RGOServiceBase.maxNrClients)
                 {
-                    var clientConn = new ClientConnection(ID)
+                    var clientConn = new RGOClientConnection(ID)
                     {
                         IsLocal = Connection.IsOnLoopback,
                         BatchSize = RGOServiceBase.LocalBatchsize,

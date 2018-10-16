@@ -8,7 +8,7 @@ namespace RGF
 
         public static List<RGOServiceBase> AllServers { get; protected set; } = new List<RGOServiceBase>();
 
-        public static Dictionary<uint, ClientConnection> ClientSessions { get; set; } = new Dictionary<uint, ClientConnection>();
+        public static Dictionary<uint, RGOClientConnection> ClientSessions { get; set; } = new Dictionary<uint, RGOClientConnection>();
 
         public string Name { get; protected set; }
 
@@ -26,21 +26,21 @@ namespace RGF
 
             //check for disconnected clients
             foreach (var ClientID in removeList)
-            {
-                foreach (var Server in AllServers)
                 {
-                    //remove all connections from the server
-                    string connName = ClientSessions[ClientID].ConnectionName;
-                    log.Debug($"Client {connName} was removed from the client list");
-                    Server.RemoveClient(connName);
-                }
-                //remove the client from the RGO elements
-                ClientSessions[ClientID].DeleteFWORef(ClientID);
-                
+                    foreach (var Server in AllServers)
+                    {
+                        //remove all connections from the server
+                        string connName = ClientSessions[ClientID].ConnectionName;
+                        log.Debug($"Client {connName} was removed from the client list");
+                        Server.RemoveClient(connName);
+                    }
+                    //remove the client from the RGO elements
+                    ClientSessions[ClientID].DeleteFWORef(ClientID);
 
-                //erase the client from the sesions list
+
+                    //erase the client from the sesions list
                 ClientSessions.Remove(ClientID);
-            }
+                }
             removeList.Clear();
         }
 

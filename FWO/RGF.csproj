@@ -62,7 +62,7 @@
     <Compile Include="StarterClasses\RGOClientManager.cs" />
     <Compile Include="StarterClasses\RGOServiceStarter.cs" />
     <Compile Include="StarterClasses\RGOStarterBase.cs" />
-    <Compile Include="Services\ClientConnection.cs" />
+    <Compile Include="Services\RGOClientConnection.cs" />
     <Compile Include="Clients\RGOClient.cs" />
     <Compile Include="Clients\RGOClientBase.cs" />
     <Compile Include="Clients\RGOClientDescriptions.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Services\RGOService.cs" />
     <Compile Include="Services\RGOServiceBase.cs" />
     <Compile Include="Services\RGOServiceDescriptions.cs" />
-    <Compile Include="Services\RGOServiceFWO.cs" />
+    <Compile Include="Services\RGOServiceTransfer.cs" />
     <Compile Include="Services\RGOServiceNotification.cs" />
     <Compile Include="Services\RGOServiceRW.cs" />
     <Compile Include="Services\RGOServiceServerConn.cs" />
