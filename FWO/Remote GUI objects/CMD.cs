@@ -9,9 +9,8 @@ namespace RGF
     [Serializable]
     public class CMD : RGOBase
     {
-        public delegate void CMDDelegate(string args);
         [NonSerialized]
-        public CMDDelegate Command;
+        public Action<string> Command;
 
         public string _Args;
         public string Args { get { return _Args; } set { _Args = value; MustSerialize = true; } }
@@ -22,7 +21,7 @@ namespace RGF
             set { if (value != _CanExecute) { _CanExecute = value; MustSerialize = true; } }
         }
 
-        public CMD(int modnr, int id, CMDDelegate cmd, string desc) : base(modnr, id, desc)
+        public CMD(int modnr, int id, Action<string> cmd, string desc) : base(modnr, id, desc)
         {
             _Args = "";
             Command = cmd;

@@ -6,8 +6,7 @@ namespace RGF
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger("RGOClientRW");
 
-        public delegate void CreateWriteListDelegate();
-        public CreateWriteListDelegate CreateWriteList;
+        public Action CreateWriteList;
 
         public RGOClientRW(string IPAddress, string serviceName) : base(IPAddress, RGOStarterBase.RWServicePort, serviceName)
         {

@@ -14,14 +14,12 @@ namespace RGF
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public delegate void InitdebugOutput(string msg);
         [NonSerialized]
-        public static InitdebugOutput initDebug;
+        public static Action<string> initDebug;
         protected void Debug(string msg) { initDebug?.Invoke(msg); }
 
-        public delegate void UpdateDelegate();
         [NonSerialized]
-        public UpdateDelegate Update;
+        public Action Update;
   
 
         public int ID { get; private set; }

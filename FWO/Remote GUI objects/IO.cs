@@ -16,9 +16,8 @@ namespace RGF
     public abstract class IO<T> : RGOBase where T : struct, IComparable<T>
     {
         //conversion function to convert from Volts to real-world values or back
-        public delegate double ExternalConversion(double input);
         //[NonSerialized]
-        public ExternalConversion Convert = p => p;
+        public Func<double, double> Convert = p => p;
 
         protected T _Value;
         public abstract T Value { get; set; }

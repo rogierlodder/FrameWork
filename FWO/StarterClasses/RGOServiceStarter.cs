@@ -15,8 +15,7 @@ namespace RGF
         private static RGOServiceDescriptions DescriptionService;
         private static RGOServiceNotification Notificationservice;
 
-        public delegate void ConnStateChangedDelegate(bool connected, uint ID);
-        public static ConnStateChangedDelegate ConnStateChanged;
+        public static Action<bool, uint> ConnStateChanged;
 
         public static int ServerConnBufSize { get; set; } = 500000;
         public static int FWOServiceBufSize { get; set; } = 500000;
