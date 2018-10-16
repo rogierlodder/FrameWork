@@ -18,13 +18,13 @@ namespace RGF
         public TReply Reply { get; protected set; }
         public bool IsConnected { get { return client.ConnState == CEthernetDevice.State.Connected; } }
         public bool Received { get { return client.Received; } }
+        public bool Running { get; set; } = false;
 
         protected CEthernetClient client;
         protected abstract void CreateRequest();
         protected abstract void ProcessReply();
 
         protected byte[] receiveBuf = new byte[65536];
-        protected bool Running = false;
         protected bool WaitingForReply = false;
 
         private log4net.ILog log = log4net.LogManager.GetLogger("RGOClient<>");
@@ -39,9 +39,8 @@ namespace RGF
             {
                 client = new CEthernetClient("");
                 client.SetConnection(IPAddress, portNr, "TCP");
-                //client.ConnectAndStart();
                 client.Connect();
-                client.ByteDataReceived = DataReceived;
+                client.ByteDataReceived = ProcessReceivedData;
             }
             catch
             {
@@ -50,35 +49,14 @@ namespace RGF
             AllClients.Add(this);
         }
 
-        public void Stop()
-        {
-            Running = false;
-        }
-
-        public void Start()
-        {
-            Running = true;
-        }
-
         public void Disconnect()
         {
             client.Disconnect();
         }
 
-        public bool SendSerializedData()
+        public void ProcessReceivedData(int nrBytes)
         {
-            CreateRequest();
-
-            memStream.Seek(0, SeekOrigin.Begin);
-            formatter.Serialize(memStream, Request);
-
-            if (client.SendData(memStream.GetBuffer(), (int)memStream.Length, receiveBuf)) return true;
-            else return false;
-        }
-
-        public void ProcessReceivedData()
-        {
-            if (client.NrReceivedBytes > 0)
+            if (nrBytes > 0)
             {
                 log.Debug($"Received bytes: {client.NrReceivedBytes}");
                 memStream.Seek(0, SeekOrigin.Begin);
@@ -95,9 +73,9 @@ namespace RGF
             }
         }
 
-        public override void Run()
+        public override bool Run()
         {
-            if (!Running) return;
+            if (!Running) return false;
 
             //run the state machine of the ethernet client
             client.Run();
@@ -106,15 +84,20 @@ namespace RGF
             {
                 if (WaitingForReply == false)
                 {
-                    SendSerializedData();
-                    WaitingForReply = true;
+                    CreateRequest();
+
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    formatter.Serialize(memStream, Request);
+
+                    if (client.SendData(memStream.GetBuffer(), (int)memStream.Length, receiveBuf))
+                    {
+                        WaitingForReply = true;
+                        return true;
+                    }
+                    else return false;
                 }
             }
-        }
-
-        private void DataReceived(int nrBytes)
-        {
-            ProcessReceivedData();
+            return false;
         }
     }
 

@@ -29,7 +29,7 @@ namespace FWOClientTests
             FWORWClient = new RGOClientRW("127.0.0.1", "RGORWService");
             for (int i = 10000; i < 10000 + 100; i++) FWORWClient.Request.ReqList.Add(i * 100);
 
-            FWORWClient.Start();
+            FWORWClient.Running = true;
             FWORWClient.CreateWriteList = CreateWriteList;
 
             await RGOClientManager.WaitForClientDisconnectTask();

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace RGF
-{
+{ 
     public abstract class RGOServiceBase 
     {
         static log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceBase");
@@ -14,33 +14,30 @@ namespace RGF
 
         public abstract void Run();
 
-        protected abstract void RemoveClient(string name);
+        protected abstract bool RemoveClient(uint clientID);
 
         private static List<uint> removeList = new List<uint>();
 
         public static void RunAllServices()
         {
             foreach (var Server in AllServers) Server.Run();
-
-            if (removeList.Count == 0) return;
-
+            
             //check for disconnected clients
+            if (removeList.Count == 0) return;
             foreach (var ClientID in removeList)
+            {
+                foreach (var Server in AllServers)
                 {
-                    foreach (var Server in AllServers)
-                    {
-                        //remove all connections from the server
-                        string connName = ClientSessions[ClientID].ConnectionName;
-                        log.Debug($"Client {connName} was removed from the client list");
-                        Server.RemoveClient(connName);
-                    }
-                    //remove the client from the RGO elements
-                    ClientSessions[ClientID].DeleteFWORef(ClientID);
-
-
-                    //erase the client from the sesions list
-                ClientSessions.Remove(ClientID);
+                    if (Server.RemoveClient(ClientID)) log.Debug($"Client {ClientID} was removed from the client list of the {Server.Name}");
+                    else log.Debug($"Client {ClientID} could not be removed from the client list of the {Server.Name}");
                 }
+                //remove the client from the RGO elements
+                ClientSessions[ClientID].DeleteFWORef(ClientID);
+
+
+                //erase the client from the sesions list
+                ClientSessions.Remove(ClientID);
+            }
             removeList.Clear();
         }
 

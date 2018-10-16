@@ -55,9 +55,15 @@ namespace RGF
 
         protected virtual void MonitorConnection() { }
 
-        protected override void RemoveClient(string connectionName)
+        protected override bool RemoveClient(uint clientID)
         {
-            server.RemoveConnection(connectionName);
+            var connectionName = server.AllConnectionsList.Where(p => p.ClientID == clientID).FirstOrDefault();
+            if (connectionName != null)
+            {
+                server.RemoveConnection(connectionName.Address);
+                return true;
+            }
+            else return false;
         }
    
 
@@ -78,6 +84,9 @@ namespace RGF
                     try
                     {
                         Request = (TRequest)binFormatter.Deserialize(memStream);
+
+                        //identify the client with the client ID from the incoming request
+                        Connection.ClientID = (Request as RGORequestBase).ClientID;
                     }
                     catch
                     {

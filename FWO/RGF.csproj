@@ -53,12 +53,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FWOControls\ControlsHelper.cs" />
-    <Compile Include="FWOControls\RGOButton.cs" />
-    <Compile Include="FWOControls\RGOComboBox.cs" />
-    <Compile Include="FWOControls\RGOLabel.cs" />
-    <Compile Include="FWOControls\RGOTextBox.cs" />
-    <Compile Include="FWOControls\IUpdatableControl.cs" />
+    <Compile Include="RGOControls\ControlsHelper.cs" />
+    <Compile Include="RGOControls\RGOButton.cs" />
+    <Compile Include="RGOControls\RGOComboBox.cs" />
+    <Compile Include="RGOControls\RGOLabel.cs" />
+    <Compile Include="RGOControls\RGOTextBox.cs" />
+    <Compile Include="RGOControls\IUpdatableControl.cs" />
     <Compile Include="StarterClasses\RGOClientManager.cs" />
     <Compile Include="StarterClasses\RGOServiceStarter.cs" />
     <Compile Include="StarterClasses\RGOStarterBase.cs" />

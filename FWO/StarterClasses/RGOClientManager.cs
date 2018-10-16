@@ -33,7 +33,7 @@ namespace RGF
 
             //start the Clients
             ServerComm = new RGOClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
-            ServerComm.Start();
+            ServerComm.Running = true;
 
             RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
@@ -58,7 +58,7 @@ namespace RGF
                 if (ServerComm.ServerConnected)
                 {
                     state = RGOStates.DownloadingAllFWO;
-                    RGOClientDownloader.Start();
+                    RGOClientDownloader.Running = true;
                 }
             }
 
@@ -67,7 +67,7 @@ namespace RGF
                 if(RGOClientDownloader.RGODownloadDone == true)
                 {
                     state = RGOStates.DownloadingDSC;
-                    DSCClient.Start();
+                    DSCClient.Running = true;
                 }
             }
 
