@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using RLStateMachine;
 
 namespace RGF
 {
@@ -21,6 +22,7 @@ namespace RGF
         public bool ClientHasStarted  { get; private set; } = false;
         public RGOStates state { get; private set; } = new RGOStates();
 
+        private RLSM SM = new RLSM("RGOClientManager");
         private Timer CycleTimer;
 
         public void StartClients(int basePortNr, string ServerAddress, int cycleTime, bool runFromTimer)
@@ -42,60 +44,58 @@ namespace RGF
             if (runFromTimer) CycleTimer.Change(0, cycleTime);
         }
 
+        public RGOClientManager()
+        {
+            SM.FirstAction = () =>
+            {
+                //run the state machines of all clients
+                for (int i = 0; i < RGOClientBase.AllClients.Count; i++)
+                {
+                    RGOClientBase.AllClients[i].Run();
+                }
+                //monitor the server connection
+                ServerComm.MonitorConnection();
+            };
+
+            SM.AddState(RGOStates.ConnectingToServer, new List<Transition>
+            {
+                new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Running = true, RGOStates.DownloadingAllFWO),
+            }, null, StateType.entry);
+
+            SM.AddState(RGOStates.DownloadingAllFWO, new List<Transition>
+            {
+                new Transition("DownloadDone", () => RGOClientDownloader.RGODownloadDone == true, () => DSCClient.Running = true,  RGOStates.DownloadingDSC),
+            }, null, StateType.transition);
+
+            SM.AddState(RGOStates.DownloadingDSC, new List<Transition>
+            {
+                new Transition("DescriptionsReceived", () => DSCClient.DSCsReceived == true, () => log.Info("All RGO downloads done"), RGOStates.Running),
+            }, null, StateType.transition);
+
+            SM.AddState(RGOStates.Running, new List<Transition>
+            {
+                new Transition("ServerCommDisconnected", () => ServerComm.ServerConnected == false, null, RGOStates.Disconnected),
+            }, null, StateType.idle);
+
+            SM.AddState(RGOStates.Disconnected, new List<Transition>
+            {
+
+            }, null, StateType.end);
+
+            SM.Finalize();
+        }
+
+
         private void Run(object o)
         {
-            //run the state machines of all clients
-            for (int i=0; i< RGOClientBase.AllClients.Count; i++)
-            {
-                RGOClientBase.AllClients[i].Run();
-            }
-            //monitor the server connection
-            ServerComm.MonitorConnection();
-
-            //state machine
-            if (state == RGOStates.ConnectingToServer)
-            {
-                if (ServerComm.ServerConnected)
-                {
-                    state = RGOStates.DownloadingAllFWO;
-                    RGOClientDownloader.Running = true;
-                }
-            }
-
-            if (state == RGOStates.DownloadingAllFWO)
-            {
-                if(RGOClientDownloader.RGODownloadDone == true)
-                {
-                    state = RGOStates.DownloadingDSC;
-                    DSCClient.Running = true;
-                }
-            }
-
-            if (state == RGOStates.DownloadingDSC)
-            {
-                if (DSCClient.DSCsReceived == true)
-                {
-                    state = RGOStates.Running;
-                    log.Info("All RGO downloads done");
-                }
-            }
-
-            if (state == RGOStates.Running)
-            {
-                if (ServerComm.ServerConnected == false) state = RGOStates.Disconnected;
-            }
-
-            if (state == RGOStates.Disconnected)
-            {
-
-            }
+            SM.Run();
         }
 
         public Task WaitForClientConnectTask()
         {
             return Task.Run(() => 
             {
-                while (state != RGOStates.Running)
+                while ((RGOStates)SM.CurrentState != RGOStates.Running)
                 {
                     Thread.Sleep(100);
                 }
@@ -107,7 +107,7 @@ namespace RGF
         {
             return Task.Run(() =>
             {
-                while (state != RGOStates.Disconnected)
+                while ((RGOStates)SM.CurrentState != RGOStates.Disconnected)
                 {
                     Thread.Sleep(100);
                 }

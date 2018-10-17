@@ -27,7 +27,7 @@ namespace RGF
         protected byte[] receiveBuf = new byte[65536];
         protected bool WaitingForReply = false;
 
-        private log4net.ILog log = log4net.LogManager.GetLogger("RGOClient<>");
+        private log4net.ILog log;// = log4net.LogManager.GetLogger("RGOClient<>");
         private MemoryStream memStream = new MemoryStream();
         private BinaryFormatter formatter = new BinaryFormatter();
         private Stopwatch sw = new Stopwatch();
@@ -35,6 +35,7 @@ namespace RGF
         public RGOClient(string IPAddress, int portNr, string serviceName)
         {
             Name = serviceName;
+            log = log4net.LogManager.GetLogger($"RGOClient<{Name}>");
             try
             {
                 client = new CEthernetClient("");
