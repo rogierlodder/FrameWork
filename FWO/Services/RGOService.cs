@@ -57,10 +57,13 @@ namespace RGF
 
         protected override bool RemoveClient(uint clientID)
         {
-            var connectionName = server.AllConnectionsList.Where(p => p.ClientID == clientID).FirstOrDefault();
-            if (connectionName != null)
+            var ConnectedClients = server.AllConnectionsList.Where(p => p.ClientID == clientID);
+            if (ConnectedClients != null)
             {
-                server.RemoveConnection(connectionName.Address);
+                foreach (var client in ConnectedClients)
+                {
+                    server.RemoveConnection(client.Address);
+                }
                 return true;
             }
             else return false;

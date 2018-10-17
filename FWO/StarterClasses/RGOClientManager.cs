@@ -14,18 +14,18 @@ namespace RGF
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //clients
-        public static RGOClientServerComm ServerComm { get; private set; }
-        private static RGOClientFWO RGOClientDownloader;
-        private static RGOClientDescriptions DSCClient;
-        private static Timer CycleTimer;
-        private const int Cycletime = 200;
+        public  RGOClientServerComm ServerComm { get; private set; }
+        public  RGOClientNotifications NotifClient;
+        public RGOClientFWO RGOClientDownloader;
+        public RGOClientDescriptions DSCClient;
+        public bool ClientHasStarted  { get; private set; } = false;
+        public RGOStates state { get; private set; } = new RGOStates();
 
-        public static RGOClientNotifications NotifClient;
-        public static bool ClientHasStarted  { get; private set; } = false;
-        public static RGOStates state { get; private set; }
+        private Timer CycleTimer;
 
-        public static void StartClients(int basePortNr, string ServerAddress)
+        public void StartClients(int basePortNr, string ServerAddress, int cycleTime, bool runFromTimer)
         {
+            state = RGOStates.ConnectingToServer;
             RGOBase.RunsOnServer = false;
 
             if (basePortNr == 0) basePortNr = DefBasePort;
@@ -39,10 +39,10 @@ namespace RGF
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
-            CycleTimer.Change(0, Cycletime);
+            if (runFromTimer) CycleTimer.Change(0, cycleTime);
         }
 
-        private static void Run(object o)
+        private void Run(object o)
         {
             //run the state machines of all clients
             for (int i=0; i< RGOClientBase.AllClients.Count; i++)
@@ -91,7 +91,7 @@ namespace RGF
             }
         }
 
-        public static Task WaitForClientConnectTask()
+        public Task WaitForClientConnectTask()
         {
             return Task.Run(() => 
             {
@@ -103,7 +103,7 @@ namespace RGF
         }
 
 
-        public static Task WaitForClientDisconnectTask()
+        public Task WaitForClientDisconnectTask()
         {
             return Task.Run(() =>
             {

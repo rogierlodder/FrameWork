@@ -12,6 +12,7 @@ namespace FWOClientTests
     public class RGOClientTest
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        RGOClientManager RGOMan = new RGOClientManager();
         RGOClientRW FWORWClient;
 
         void CreateWriteList()
@@ -21,9 +22,9 @@ namespace FWOClientTests
 
         async void StartApplication()
         {
-            RGOClientManager.StartClients(45010, "127.0.0.1");
+            RGOMan.StartClients(45010, "127.0.0.1", 200, true);
 
-            await RGOClientManager.WaitForClientConnectTask();
+            await RGOMan.WaitForClientConnectTask();
             log.Info("Client connected to server");
 
             FWORWClient = new RGOClientRW("127.0.0.1", "RGORWService");
@@ -32,7 +33,7 @@ namespace FWOClientTests
             FWORWClient.Running = true;
             FWORWClient.CreateWriteList = CreateWriteList;
 
-            await RGOClientManager.WaitForClientDisconnectTask();
+            await RGOMan.WaitForClientDisconnectTask();
             log.Info("Connection to server lost");
         }
 

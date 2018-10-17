@@ -38,13 +38,13 @@ namespace RGF
             SetPorts(basePortNr);
 
             //Start the Services
-            ServerConn = new RGOServiceServerConn("ServerCommService", ServerCommServicePort);
-            FWOConn = new RGOServiceTransfer("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
-            RWService = new RGOServiceRW("RWService", RWServicePort, RWServiceBufSize);
-            DescriptionService = new RGOServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
+            ServerConn          = new RGOServiceServerConn  ("ServerCommService", ServerCommServicePort);
+            FWOConn             = new RGOServiceTransfer    ("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
+            RWService           = new RGOServiceRW          ("RWService", RWServicePort, RWServiceBufSize);
+            DescriptionService  = new RGOServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
             Notificationservice = new RGOServiceNotification("NotificationService", NotificationServicePort, NotifServiceBufSize);
-        }
 
-        
+            ServerConn.ConnStateChanged = ConnStateChanged;
+        }
     }
 }

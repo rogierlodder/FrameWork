@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RGF
 {
     public class RGOServiceServerConn : RGOService<CClientInfo, ServerInfo>
     {
+        public Action<bool, uint> ConnStateChanged { get; set; }
+
         protected override void MonitorConnection()
         {
             foreach (var C in ClientSessions)
@@ -17,7 +20,7 @@ namespace RGF
                     {
                         C.Value.ClientConnected = true;
 
-                        RGOServiceStarter.ConnStateChanged?.Invoke(true, C.Key);
+                        ConnStateChanged?.Invoke(true, C.Key);
                     }
                 }
                 else
@@ -28,7 +31,7 @@ namespace RGF
                     {
                         C.Value.ClientConnected = false;
 
-                        RGOServiceStarter.ConnStateChanged?.Invoke(false, C.Key);
+                        ConnStateChanged?.Invoke(false, C.Key);
                         C.Value.ClientDisconnectCounter = 0;
 
                         //signal that this client is no longer connected and can be erased from existence

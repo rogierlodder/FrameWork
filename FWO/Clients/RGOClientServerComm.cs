@@ -27,7 +27,7 @@ namespace RGF
             Reply = new ServerInfo();
 
             //generate "random" ClientID
-            ClientID = (uint)DateTime.Now.ToBinary();
+            ClientID = (uint)DateTime.Now.Ticks;
             Request.ClientID = ClientID;
         }
 
