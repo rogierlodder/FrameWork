@@ -57,7 +57,7 @@ namespace RGF
             }
         }
 
-        public NTF(int modnr, int id, string issuer, ErrLevel level, string errortext, string options, string desc) : base(modnr, id, desc)
+        public NTF(int modnr, string id, string issuer, ErrLevel level, string errortext, string options, string desc) : base(modnr, id, desc)
         {
             ModNr = modnr;
             _Issuer = issuer;

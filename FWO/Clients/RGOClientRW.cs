@@ -34,7 +34,7 @@ namespace RGF
 
             foreach (var F in Reply.FWOList)
             {
-                int id = F.ID;
+                string id = F.ID;
                 RGOBase.AllRGO[id].CopyValues(F);
                 RGOBase.AllRGO[id].Update?.Invoke();
             }

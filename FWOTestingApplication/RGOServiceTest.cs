@@ -22,27 +22,27 @@ namespace FWOTestingApplication
             int id = 10000;
             for (int i=0; i < nr; i ++)
             {
-                var sv1 = new SV<double>(0, id++, "The quick brown fox jumped over the lazy dog");
+                var sv1 = new SV<double>(0, id++.ToString(), "The quick brown fox jumped over the lazy dog");
             }
 
             for (int i = 0; i < nr; i++)
             {
-                var stp1 = new STP<double>(0, id++, "This is an unused description");
-            }
-
-                for (int i = 0; i < nr; i++)
-            {
-                var ai = new AI(5, id++, IOCategory.Real, "Test description that has no meaning");
-                var ao = new AO(5, id++, IOCategory.Real, "Test description that has no opinion");
-                var di = new DI(5, id++, IOCategory.Real, "Test description that has no purpose");
-                var d0 = new DO(5, id++, IOCategory.Real, "Test description that has no direction");
+                var stp1 = new STP<double>(0, id++.ToString(), "This is an unused description");
             }
 
             for (int i = 0; i < nr; i++)
             {
-                var EQP1 = new EQP<double>(6, id++, "VacuumSystem", "PumpTime", 5.5, 0, 10.3, Units.s, "This is a default description");
-                var EQP2 = new EQP<int>(6, id++, "Chuckdrive", "Travel", 5, 0, 10, Units.s, "This is a default description");
-                var EQP3 = new EQP<bool>(6, id++, "Source", "Rotationspeed", true, false, true, Units.s, "This is a default description");
+                var ai = new AI(5, id++.ToString(), IOCategory.Real, "Test description that has no meaning");
+                var ao = new AO(5, id++.ToString(), IOCategory.Real, "Test description that has no opinion");
+                var di = new DI(5, id++.ToString(), IOCategory.Real, "Test description that has no purpose");
+                var d0 = new DO(5, id++.ToString(), IOCategory.Real, "Test description that has no direction");
+            }
+
+            for (int i = 0; i < nr; i++)
+            {
+                var EQP1 = new EQP<double>(6, id++.ToString(), "VacuumSystem", "PumpTime", 5.5, 0, 10.3, Units.s, "This is a default description");
+                var EQP2 = new EQP<int>(6, id++.ToString(), "Chuckdrive", "Travel", 5, 0, 10, Units.s, "This is a default description");
+                var EQP3 = new EQP<bool>(6, id++.ToString(), "Source", "Rotationspeed", true, false, true, Units.s, "This is a default description");
             }
         }
 
@@ -64,7 +64,7 @@ namespace FWOTestingApplication
                     ServiceCycleCounter = 0;
                     RGOServiceStarter.Run();
 
-                    for (int i = 10000; i < 10000 + 100; i++) (RGOBase.AllRGO[i * 100] as SV<double>).Value = counter;
+                    for (int i = 10000; i < 10000 + 100; i++) (RGOBase.AllRGO[$"{i}0"] as SV<double>).Value = counter;
                     counter += 0.1;
                 }
                 else ServiceCycleCounter++;

@@ -59,7 +59,7 @@ namespace RGF
 
         public IOCategory Category { get; private set; } = IOCategory.Real;
 
-        public IO(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, desc)
+        public IO(int modnr, string id, IOCategory cat, string desc) : base(modnr, id, desc)
         {
             MustSerialize = true;
             Category = cat;
@@ -110,7 +110,7 @@ namespace RGF
             }
         }
 
-        public AI(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
+        public AI(int modnr, string id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
         public override void CopyValues(RGOBase newVal)
         {
@@ -137,7 +137,7 @@ namespace RGF
         }
         public override double RawValue { get { return _RawValue; } set { throw new NotImplementedException(); } }
 
-        public AO(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
+        public AO(int modnr, string id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
         public override void CopyValues(RGOBase newVal)
         {
@@ -160,7 +160,7 @@ namespace RGF
             }
         }
  
-        public DI(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
+        public DI(int modnr, string id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
         public override void CopyValues(RGOBase newVal)
         {
@@ -183,7 +183,7 @@ namespace RGF
         }
         public override bool RawValue { get { return _RawValue; } set { throw new NotImplementedException(); } }
 
-        public DO(int modnr, int id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
+        public DO(int modnr, string id, IOCategory cat, string desc) : base(modnr, id, cat, desc) { }
 
         public override void CopyValues(RGOBase newVal)
         {

@@ -14,11 +14,11 @@ namespace RGF
         private RGOBase MinEQP, MaxEQP;
 
         public int ModNr { get; set; } = -1;
-        public int ID { get; set; }
+        public string ID { get; set; }
         public List<ObjectID> ObjectIDs { get; private set; }
 
-        public int MinEQPID { get; set; } = -1;
-        public int MaxEQPID { get; set; } = -1;
+        public string MinEQPID { get; set; } = "";
+        public string MaxEQPID { get; set; } = "";
         public string ScreenKey { get; set; }
         public int NrDigits { get; set; }
 
@@ -37,7 +37,7 @@ namespace RGF
             else Init(ModNr, ID);
         }
 
-        public void Setup(string key, int modnr, int id)
+        public void Setup(string key, int modnr, string id)
         {
             ScreenKey = key;
             Init(modnr, id);
@@ -49,14 +49,14 @@ namespace RGF
             Text = stp.GetValueAsString(NrDigits);
         }
 
-        private void Init(int modnr, int id)
+        private void Init(int modnr, string id)
         {
             ObjectIDs = new List<ObjectID>();
             ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.ReadWrite));
             stp = RGOBase.GetFromID(modnr, id);
 
-            if (MinEQPID != -1) MinEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MinEQPID));
-            if (MaxEQPID != -1) MaxEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MaxEQPID));
+            if (MinEQPID != "") MinEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MinEQPID));
+            if (MaxEQPID != "") MaxEQP = RGOBase.GetFromID(RGOBase.CalcID(modnr, MaxEQPID));
 
             if (stp != null && stp.GetType().Name.Contains("STP"))
             {

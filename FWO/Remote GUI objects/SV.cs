@@ -19,7 +19,7 @@ namespace RGF
             set { if (value.CompareTo(_Value) != 0) { _Value = value; MustSerialize = true; } }
         }
 
-        public SV(int modnr, int id, string desc) : base(modnr, id, desc)
+        public SV(int modnr, string id, string desc) : base(modnr, id, desc)
         {
             if (typeof(T) == typeof(string)) (this as SV<string>)._Value = "";
         }

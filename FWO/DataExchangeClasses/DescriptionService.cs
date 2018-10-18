@@ -16,6 +16,6 @@ namespace RGF
         public int TotalNumber { get; set; }
         public int Index { get; set; }
 
-        public Dictionary<int, string> Descriptions { get; set; } = new Dictionary<int, string>();
+        public Dictionary<string, string> Descriptions { get; set; } = new Dictionary<string, string>();
     }
 }

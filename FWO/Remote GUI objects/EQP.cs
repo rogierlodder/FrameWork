@@ -34,7 +34,7 @@ namespace RGF
         public T Default { get; private set; }
         public Units Unit { get; private set; }
 
-        public EQP(int modnr, int id, string subSys, string parName, T def, T min, T max, Units unit, string desc) : base(modnr, id, desc)
+        public EQP(int modnr, string id, string subSys, string parName, T def, T min, T max, Units unit, string desc) : base(modnr, id, desc)
         {
             SubSys = subSys;
             ParName = parName;
@@ -92,7 +92,7 @@ namespace RGF
     {
         public string Enums { get; private set; }
 
-        public EnumEQP(int modnr, int id, string subSys, string parName, byte val, string enums, Units unit, string desc) : base(modnr, id, subSys, parName, val, 0, 255, unit, desc)
+        public EnumEQP(int modnr, string id, string subSys, string parName, byte val, string enums, Units unit, string desc) : base(modnr, id, subSys, parName, val, 0, 255, unit, desc)
         {
             if (enums != "") Enums = enums.Replace(" ", "");
         }
@@ -101,7 +101,7 @@ namespace RGF
     [Serializable]
     public class EQPHistData
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public DateTime Dt { get; set; }
 

@@ -25,7 +25,7 @@ namespace RGF
             set { if (_CanSetValue != value) { _CanSetValue = value; MustSerialize = true; } }
         }
 
-        public STP(int modnr, int id, string desc) : base(modnr, id, desc) { }
+        public STP(int modnr, string id, string desc) : base(modnr, id, desc) { }
 
         public override void CopyValues(RGOBase newVal)
         {
@@ -40,7 +40,7 @@ namespace RGF
     {
         public string OptionsString {get; set;}
 
-        public EnumSTP(int modnr, int id, string desc, string options) : base(modnr, id, desc)
+        public EnumSTP(int modnr, string id, string desc, string options) : base(modnr, id, desc)
         {
             if (options != "") OptionsString = options.Replace(" ", "");
         }

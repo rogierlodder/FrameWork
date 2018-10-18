@@ -17,10 +17,13 @@ namespace RGF
             Reply.FWOList.Clear();
             foreach (var I in Request.ReqList)
             {
-                if (RGOBase.AllRGO[I].MustSerialize)
+                if (RGOBase.AllRGO.ContainsKey(I)) 
                 {
-                    RGOBase.AllRGO[I].MustSerialize = false;
-                    Reply.FWOList.Add(RGOBase.AllRGO[I]);
+                    if (RGOBase.AllRGO[I].MustSerialize)
+                    {
+                        RGOBase.AllRGO[I].MustSerialize = false;
+                        Reply.FWOList.Add(RGOBase.AllRGO[I]);
+                    }
                 }
             }
 

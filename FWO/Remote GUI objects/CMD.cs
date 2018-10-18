@@ -21,7 +21,7 @@ namespace RGF
             set { if (value != _CanExecute) { _CanExecute = value; MustSerialize = true; } }
         }
 
-        public CMD(int modnr, int id, Action<string> cmd, string desc) : base(modnr, id, desc)
+        public CMD(int modnr, string id, Action<string> cmd, string desc) : base(modnr, id, desc)
         {
             _Args = "";
             Command = cmd;

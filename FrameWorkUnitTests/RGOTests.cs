@@ -12,8 +12,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase T = null;
-            EQP<double> E = new EQP<double>(1, 10100, "TestSubSys", "TestParname", 100.00, 10, 1000, Units.mBar, "TestDescription");
-            EQP<double> E_new = new EQP<double>(1, 10101, "TestSubSys", "TestParname", 100.01, 9, 1001, Units.mBar, "TestDescription");
+            EQP<double> E = new EQP<double>(1, "10100", "TestSubSys", "TestParname", 100.00, 10, 1000, Units.mBar, "TestDescription");
+            EQP<double> E_new = new EQP<double>(1, "10101", "TestSubSys", "TestParname", 100.01, 9, 1001, Units.mBar, "TestDescription");
             RGOBase.AddClientID(123456);
             T = E;
             T.CopyValues(E_new);
@@ -26,8 +26,8 @@ namespace FrameWorkUnitTests
         public void EQP_Serialization_Tests()
         {
             RGOBase.ClearAll();
-            EQP<double> eqp1 = new EQP<double>(5, 10100, "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
-            EQP<double> eqp2 = new EQP<double>(5, 10101, "TestSubSys", "testParName", 11.5, 5, 15, Units.mA, "Test description");
+            EQP<double> eqp1 = new EQP<double>(5, "10100", "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
+            EQP<double> eqp2 = new EQP<double>(5, "10101", "TestSubSys", "testParName", 11.5, 5, 15, Units.mA, "Test description");
 
             Assert.IsFalse(eqp1.Value == eqp2.Value);
 
@@ -45,8 +45,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase T = null;
-            SV<double> sv1 = new SV<double>(1, 10100, "TestDescription");
-            SV<double> sv2 = new SV<double>(1, 10101, "TestDescription");
+            SV<double> sv1 = new SV<double>(1, "10100", "TestDescription");
+            SV<double> sv2 = new SV<double>(1, "10101", "TestDescription");
 
             sv1.Value = 3.3;
             sv2.Value = 4.4;
@@ -63,8 +63,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase T = null;
-            AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
-            AI analogIn2 = new AI(1, 10101, IOCategory.Real, "test description");
+            AI analogIn1 = new AI(1, "10100", IOCategory.Real, "test description");
+            AI analogIn2 = new AI(1, "10101", IOCategory.Real, "test description");
 
             analogIn1.RawValue = 5;
             analogIn1.OverRide = false;
@@ -95,8 +95,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase.RunsOnServer = false;
-            AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
-            AI analogIn2 = new AI(1, 10101, IOCategory.Real, "test description");
+            AI analogIn1 = new AI(1, "10100", IOCategory.Real, "test description");
+            AI analogIn2 = new AI(1, "10101", IOCategory.Real, "test description");
 
             analogIn1.RawValue = 5;
             analogIn1.IsValid = true;
@@ -124,7 +124,7 @@ namespace FrameWorkUnitTests
         public void AI_test()
         {
             RGOBase.ClearAll();
-            AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
+            AI analogIn1 = new AI(1, "10100", IOCategory.Real, "test description");
 
             analogIn1.RawValue = 5;
             Assert.IsTrue(analogIn1.Value == 5);
@@ -150,7 +150,7 @@ namespace FrameWorkUnitTests
         public void AO_test()
         {
             RGOBase.ClearAll();
-            AO aout1 = new AO(1, 10100, IOCategory.Real, "test description");
+            AO aout1 = new AO(1, "10100", IOCategory.Real, "test description");
 
             aout1.Value = 5.0;
             Assert.IsTrue(aout1.RawValue == 5.0);
@@ -177,7 +177,7 @@ namespace FrameWorkUnitTests
         public void DI_test()
         {
             RGOBase.ClearAll();
-            DI di = new DI(6, 10100, IOCategory.Real, "test description");
+            DI di = new DI(6, "10100", IOCategory.Real, "test description");
             di.MustSerialize = false;
 
             Assert.IsTrue(di.Value == false);
@@ -199,7 +199,7 @@ namespace FrameWorkUnitTests
         public void DO_test()
         {
             RGOBase.ClearAll();
-            DO dout = new DO(6, 10100, IOCategory.Real, "test description");
+            DO dout = new DO(6, "10100", IOCategory.Real, "test description");
             dout.MustSerialize = false;
 
             Assert.IsTrue(dout.RawValue == false);
@@ -221,8 +221,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase T = null;
-            STP<double> setp1 = new STP<double>(5, 10100, "Test description");
-            STP<double> setp2 = new STP<double>(5, 10101, "Test description");
+            STP<double> setp1 = new STP<double>(5, "10100", "Test description");
+            STP<double> setp2 = new STP<double>(5, "10101", "Test description");
 
             setp1.Value = 5;
             setp2.Value = 10;
@@ -241,8 +241,8 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
             RGOBase T = null;
-            ARRAY<double> farr1 = new ARRAY<double>(5, 10100, 10, "test description");
-            ARRAY<double> farr2 = new ARRAY<double>(5, 10101, 10, "test description");
+            ARRAY<double> farr1 = new ARRAY<double>(5, "10100", 10, "test description");
+            ARRAY<double> farr2 = new ARRAY<double>(5, "10101", 10, "test description");
 
             for (int i = 0; i < 10; i++) farr1[i] = 1 / 10.0;
             for (int i = 0; i < 10; i++) farr2[i] = 1 / 20.0;
@@ -259,19 +259,19 @@ namespace FrameWorkUnitTests
         {
             RGOBase.ClearAll();
 
-            AI analogIn1 = new AI(1, 10100, IOCategory.Real, "test description");
+            AI analogIn1 = new AI(1, "10100", IOCategory.Real, "test description");
             analogIn1.RawValue = 5.555;
 
-            ARRAY<double> farr1 = new ARRAY<double>(5, 10101, 10, "test description");
+            ARRAY<double> farr1 = new ARRAY<double>(5, "10101", 10, "test description");
             for (int i = 0; i < 10; i++) farr1[i] = 1 / 10.0;
 
-            SV<double> sv1 = new SV<double>(1, 10102, "TestDescription");
+            SV<double> sv1 = new SV<double>(1, "10102", "TestDescription");
             sv1.Value = 3.333;
 
-            SV<string> sv2 = new SV<string>(1, 10103, "TestDescription");
+            SV<string> sv2 = new SV<string>(1, "10103", "TestDescription");
             sv2.Value = "Hello, this is an SV";
             
-            EQP<double> eqp1 = new EQP<double>(5, 10104, "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
+            EQP<double> eqp1 = new EQP<double>(5, "10104", "TestSubSys", "testParName", 10.5, 5, 15, Units.mA, "Test description");
 
             RGOBase T = analogIn1;
             Assert.AreEqual(analogIn1.Value.ToString(), T.GetValueAsString(3));
@@ -308,8 +308,8 @@ namespace FrameWorkUnitTests
         public void GuiCMD_Copyvalues()
         {
             RGOBase.ClearAll();
-            CMD cmd = new CMD(5, 10100, Testdelegate, "Test description");
-            CMD cmd2 = new CMD(5, 10101, Testdelegate2, "Test description");
+            CMD cmd = new CMD(5, "10100", Testdelegate, "Test description");
+            CMD cmd2 = new CMD(5, "10101", Testdelegate2, "Test description");
 
             cmd.Args = "X";
             cmd2.Args = "Y";

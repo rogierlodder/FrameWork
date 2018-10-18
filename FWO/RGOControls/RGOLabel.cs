@@ -15,7 +15,7 @@ namespace RGF
 
         public int ModNr { get; set; } = -1;
         public int NrDigits { get; set; } = -1;
-        public int ID { get; set; } = -1;
+        public string ID { get; set; } = "";
         public List<ObjectID> ObjectIDs { get; set; }
         public string ScreenKey { get; set; }
 
@@ -38,13 +38,13 @@ namespace RGF
             else Init(ModNr, ID);
         }
 
-        public void Setup(string key, int modnr, int id)
+        public void Setup(string key, int modnr, string id)
         {
             ScreenKey = key;
             Init(modnr, id);
         }
 
-        private void Init(int modnr, int id)
+        private void Init(int modnr, string id)
         {
             ObjectIDs = new List<ObjectID>();
             ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.Read));

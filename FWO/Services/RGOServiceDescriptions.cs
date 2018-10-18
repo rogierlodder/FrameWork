@@ -9,8 +9,8 @@ namespace RGF
     {
         log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceDescriptions");
 
-        Dictionary<int, string> LocalDict = new Dictionary<int, string>();
-        List<int> IDList = new List<int>();
+        Dictionary<string, string> LocalDict = new Dictionary<string, string>();
+        List<string> IDList = new List<string>();
 
         public RGOServiceDescriptions(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {

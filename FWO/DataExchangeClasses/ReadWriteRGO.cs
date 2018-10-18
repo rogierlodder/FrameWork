@@ -9,7 +9,7 @@ namespace RGF
     [Serializable]
     public class RequestRW : RGORequestBase
     {
-        public List<int> ReqList = new List<int>();
+        public List<string> ReqList = new List<string>();
         public List<RGOBase> WriteList = new List<RGOBase>();
     }
 

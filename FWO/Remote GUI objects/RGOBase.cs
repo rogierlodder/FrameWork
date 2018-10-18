@@ -22,7 +22,7 @@ namespace RGF
         public Action Update;
   
 
-        public int ID { get; private set; }
+        public string ID { get; private set; }
         public int ModNr { get; protected set; }
 
         [NonSerialized]
@@ -54,7 +54,7 @@ namespace RGF
         [NonSerialized]
         public string Description;
 
-        static public Dictionary<int, RGOBase> AllRGO = new Dictionary<int, RGOBase>();
+        static public Dictionary<string, RGOBase> AllRGO = new Dictionary<string, RGOBase>();
 
         /// <summary>
         /// Contructor
@@ -62,7 +62,7 @@ namespace RGF
         /// <param name="modnr"></param>
         /// <param name="id"></param>
         /// <param name="desc"></param>
-        public RGOBase(int modnr, int id, string desc)
+        public RGOBase(int modnr, string id, string desc)
         {
             ModNr = modnr;
             ID = CalcID(modnr, id);
@@ -94,19 +94,19 @@ namespace RGF
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public static RGOBase GetFromID(int ID)
+        public static RGOBase GetFromID(string ID)
         {
             if (AllRGO.ContainsKey(ID)) return AllRGO[ID]; else return null;
         }
 
-        public static RGOBase GetFromID(int modnr, int ID)
+        public static RGOBase GetFromID(int modnr, string ID)
         {
             if (AllRGO.ContainsKey(CalcID(modnr,  ID))) return AllRGO[CalcID(modnr, ID)]; else return null;
         }
 
-        public static int CalcID(int modnr, int id)
+        public static string CalcID(int modnr, string id)
         {
-            return id * 100 + modnr;
+            return $"{id}{modnr}";
         }
 
 

@@ -15,7 +15,7 @@ namespace RGF
             set { if (value.CompareTo(_Value[index]) != 0) { _Value[index] = value; MustSerialize = true; } }
         }
 
-        public ARRAY(int modnr, int id, int size, string desc) : base(modnr, id, desc)
+        public ARRAY(int modnr, string id, int size, string desc) : base(modnr, id, desc)
         {
             _Value = new T[size];
         }
