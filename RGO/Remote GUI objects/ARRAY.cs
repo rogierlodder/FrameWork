@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RGF
 {
     [Serializable]
-    public class ARRAY<T> : RGOBase where T: IComparable<T>
+    public class ARRAY<T> : RGOBase where T: struct, IComparable<T>
     {
         private T[] _Value;
         public T this[int index] {
