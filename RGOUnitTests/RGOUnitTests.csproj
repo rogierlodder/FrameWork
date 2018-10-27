@@ -63,7 +63,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FWO\RGF.csproj">
+    <ProjectReference Include="..\RGO\RGF.csproj">
       <Project>{e18ef332-db01-4dc5-a85f-2308dbaf5275}</Project>
       <Name>RGF</Name>
     </ProjectReference>
