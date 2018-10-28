@@ -22,5 +22,7 @@ namespace RGF
         public static List<RGOClientBase> AllClients { get; protected set; } = new List<RGOClientBase>();
 
         public abstract bool Run();
+
+        public abstract void Disconnect();
     }
 }

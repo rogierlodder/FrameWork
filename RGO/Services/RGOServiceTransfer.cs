@@ -12,27 +12,25 @@ namespace RGF
 
         public RGOServiceTransfer(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
-            Request = new RequestAllRGO();
-            Reply = new ReplyAllRGO();
-
             LocalFWOList = RGOBase.AllRGO.Select(p => p.Value).ToList();
         }
 
-        public override bool ProcessData()
+        public override ReplyAllRGO ProcessData(RequestAllRGO Request)
         {
+            var Reply = new ReplyAllRGO();
             uint ID = Request.ClientID;
-            if (!ClientSessions.ContainsKey(ID)) return false;
+            if (!ClientSessions.ContainsKey(ID)) return null;
 
             log.Debug($"Requested {Request.RequestIndex}");
 
             int start = Math.Min(LocalFWOList.Count - 1, Request.RequestIndex);
             int nr = Math.Min(LocalFWOList.Count - start, ClientSessions[ID].BatchSize);
-            if (nr == 0) return false;
+            if (nr == 0) return null;
 
             Reply.Index = start;
             Reply.TotalNumber = LocalFWOList.Count;
             Reply.FWOBjects = LocalFWOList.GetRange(start, nr);
-            return true;
+            return Reply;
         }
     }
 }

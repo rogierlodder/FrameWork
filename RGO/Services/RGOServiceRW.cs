@@ -5,13 +5,13 @@ namespace RGF
     {
         public RGOServiceRW(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
-            Request = new RequestRW();
-            Reply = new ReplyRW();
+
         }
 
 
-        public override bool ProcessData()
+        public override ReplyRW ProcessData(RequestRW Request)
         {
+            var Reply = new ReplyRW();
             foreach (var F in Request.WriteList) RGOBase.AllRGO[F.ID].CopyValues(F);
 
             Reply.FWOList.Clear();
@@ -27,7 +27,7 @@ namespace RGF
                 }
             }
 
-            return true;
+            return Reply;
         }
     }
 }

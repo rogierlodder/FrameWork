@@ -50,9 +50,10 @@ namespace RGF
             AllClients.Add(this);
         }
 
-        public void Disconnect()
+        public override void Disconnect()
         {
             client.Disconnect();
+            Running = false;
         }
 
         public void ProcessReceivedData(int nrBytes)

@@ -15,8 +15,8 @@ namespace RGF
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         //clients
-        public  RGOClientServerComm ServerComm { get; private set; }
-        public  RGOClientNotifications NotifClient;
+        public RGOClientServerComm ServerComm { get; private set; }
+        public RGOClientNotifications NotifClient;
         public RGOClientFWO RGOClientDownloader;
         public RGOClientDescriptions DSCClient;
         public bool ClientHasStarted  { get; private set; } = false;
@@ -53,13 +53,12 @@ namespace RGF
                 {
                     RGOClientBase.AllClients[i].Run();
                 }
-                //monitor the server connection
-                ServerComm.MonitorConnection();
             };
 
             SM.AddState(RGOStates.ConnectingToServer, new List<Transition>
             {
                 new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Running = true, RGOStates.DownloadingAllFWO),
+                new Transition("ConnectionRejected", () => ServerComm.ConnectionRejected, () => log.Error("The connection was rejected by the server."), RGOStates.Disconnected)
             }, null, StateType.entry);
 
             SM.AddState(RGOStates.DownloadingAllFWO, new List<Transition>
@@ -80,7 +79,10 @@ namespace RGF
             SM.AddState(RGOStates.Disconnected, new List<Transition>
             {
 
-            }, null, StateType.end);
+            }, () =>
+            {
+                foreach (var C in RGOClientBase.AllClients) C.Disconnect();
+            }, StateType.end);
 
             SM.Finalize();
         }

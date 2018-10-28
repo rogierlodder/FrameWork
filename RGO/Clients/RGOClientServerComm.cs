@@ -34,31 +34,39 @@ namespace RGF
         protected override void CreateRequest()
         {
             Request.Counter++;
+            ServerCommCounter = Request.Counter;
         }
 
         protected override void ProcessReply ()
         {
+            //check every incoming packet that the server has not rejected the connection
             WaitingForReply = false;
             if (Reply.ConnectionAccepted == false)
             {
                 ConnectionRejected = true;
+                ServerConnected = false;
             }
-        }
-
-        public void MonitorConnection()
-        {
-            if (ServerCommCounter != Reply.SessionCounter)
+            else
             {
-                ServerCommCounter = Reply.SessionCounter;
+                ServerConnected = true;
+                ConnectionRejected = false;
+            }
+
+            //process the session counter
+            if (ServerCommCounter  == Reply.SessionCounter)
+            {
+                //ServerCommCounter++;
                 ServerDisconnectCounter = 0;
                 if (ServerConnected == false)
                 {
                     ServerConnected = true;
+                    ConnectionRejected = false;
                     log.Debug("Server connected");
                 }
             }
             else
             {
+                log.Debug($"Unexpected session number received ({ Reply.SessionCounter})");
                 ServerDisconnectCounter++;
                 if (ServerDisconnectCounter > ServerConnectionTimeoutCycles && ServerConnected == true)
                 {

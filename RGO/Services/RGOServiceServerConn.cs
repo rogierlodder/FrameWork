@@ -43,13 +43,13 @@ namespace RGF
 
         public RGOServiceServerConn(string name, int portNr) : base(name, portNr)
         {
-            Request = new CClientInfo();
-            Reply = new ServerInfo();
+
         }
 
 
-        public override bool ProcessData()
+        public override ServerInfo ProcessData(CClientInfo Request)
         {
+            ServerInfo Reply = new ServerInfo();
             uint ID = Request.ClientID;
 
             if (ClientSessions.ContainsKey(ID) == false)
@@ -66,6 +66,7 @@ namespace RGF
 
                     ClientSessions.Add(ID, clientConn);
 
+                    
                     Reply.ConnectionAccepted = true;
                 }
                 else Reply.ConnectionAccepted = false;
@@ -73,13 +74,14 @@ namespace RGF
             else
             {
                 ClientSessions[ID].ClientCommCounter = Request.Counter;
+                log.Debug($"Client: {Request.ClientID}, counter:{Request.Counter}");
 
                 Reply.SetTime();
-                Reply.SessionCounter++;
+                Reply.SessionCounter = Request.Counter;
                 Reply.CycleTime = RGOServiceStarter.MeasuredCycleTime;
             }
 
-            return true;
+            return Reply;
         }
     }
 }

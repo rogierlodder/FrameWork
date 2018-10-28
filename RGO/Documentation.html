@@ -29,20 +29,26 @@
 
     The GUI and server communicate through a set of objects called the FrameWorkObjects. There are several different
     types:
-    <li>EQP: this is a parameter that is used by the server, but the values can be seen and changed by the GUI. The
-        values are stored in a data structure that the Server reads at boot time. It is mostly a setting that
-        determines the behavior of the server.</li>
-    <li>SV: status variable: these are volatile values indicating the state or measured values of the server. They are
-        only read by the GUI.</li>
-    <li>IO: these represent real hardware IO on the server. Their values can be read by the GUI, but the IO can also be
-        set in an overridden state by the GUI, and override values can be assigned. The types are digital I/O and
-        analog I/O</li>
-    <li>NTF: this type is used to raise errors that can be seen by the GUI. The GUI can respond to each error with a
-        recovery option, and the selected recovery option is updated on the server.</li>
-    <li>STP: set points are only written from the GUI to the server. </li>
-    <li>Array: When data must be sent efficiently as a single block, the array must be used.</li>
-    <li>Command: This tag is used to send commands from the GUI to the server. Since this command can only be initiated
-        by hand, only one command can be sent at one time</li>
+    <ol>
+        <li>EQP: this is a parameter that is used by the server, but the values can be seen and changed by the GUI. The
+            values are stored in a data structure that the Server reads at boot time. It is mostly a setting that
+            determines the behavior of the server.</li>
+        <li>SV: status variable: these are volatile values indicating the state or measured values of the server. They
+            are
+            only read by the GUI.</li>
+        <li>IO: these represent real hardware IO on the server. Their values can be read by the GUI, but the IO can
+            also be
+            set in an overridden state by the GUI, and override values can be assigned. The types are digital I/O and
+            analog I/O</li>
+        <li>NTF: this type is used to raise errors that can be seen by the GUI. The GUI can respond to each error with
+            a
+            recovery option, and the selected recovery option is updated on the server.</li>
+        <li>STP: set points are only written from the GUI to the server. </li>
+        <li>Array: When data must be sent efficiently as a single block, the array must be used.</li>
+        <li>Command: This tag is used to send commands from the GUI to the server. Since this command can only be
+            initiated
+            by hand, only one command can be sent at one time</li>
+    </ol>
     <br>
     All RGO classes except the command are generic must be of type IComparable struct.
 
@@ -68,27 +74,29 @@
     <h1>Services</h1>
 
     There are five services. Each server handles a particular kind of traffic
-    <li>ServerConn - initiates and monitors the connection</li>
-    <li>FWOConn - transmits the FWO object</li>
-    <li>RWService - the main service for exchanging FWO objects</li>
-    <li>DescriptionService - the descriptions of the FWOs can be quite long, so are not serialized for performance
-        reasons. With this service they can be transmitted once during startup after all the FWO have been transferred
-        and created by the client</li>
-    <li>NotificationService - This is the service used for errors / alarms / notifications</>
+    <ol>
+        <li>ServerConn - initiates and monitors the connection</li>
+        <li>FWOConn - transmits the FWO object</li>
+        <li>RWService - the main service for exchanging FWO objects</li>
+        <li>DescriptionService - the descriptions of the FWOs can be quite long, so are not serialized for performance
+            reasons. With this service they can be transmitted once during startup after all the FWO have been transferred
+            and created by the client</li>
+        <li>NotificationService - This is the service used for errors / alarms / notifications</>
+    </ol>
 
-    <h1>Implementation details</h1>
+        <h1>Implementation details</h1>
 
-    Here are more FWO properties:<br>
-    Each FWO object “knows” whether is is running on the server or the GUI. There is a static variable set by the
-    client manager
-    There is a static dictionary containing all the FWO objects in the FWO class
+        Here are more FWO properties:<br>
+        Each FWO object “knows” whether is is running on the server or the GUI. There is a static variable set by the
+        client manager
+        There is a static dictionary containing all the FWO objects in the FWO class
 
-    Each service can handle multiple clients.<br>
-    For every request, the client includes its ID<br>
-    
-    S<h2>Screens</h2>
-    Each screen has its own RWClient that is switched on and off when the screen gets or loses focus. Each
-    application can therefore have many different clients that service many different screens or services.
+        Each service can handle multiple clients.<br>
+        For every request, the client includes its ID<br>
+
+        S<h2>Screens</h2>
+        Each screen has its own RWClient that is switched on and off when the screen gets or loses focus. Each
+        application can therefore have many different clients that service many different screens or services.
 </body>
 
 </html>

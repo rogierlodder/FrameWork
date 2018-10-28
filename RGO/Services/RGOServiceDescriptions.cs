@@ -14,23 +14,21 @@ namespace RGF
 
         public RGOServiceDescriptions(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
-            Request = new DescriptionRequest();
-            Reply = new DescriptionReply();
-
             LocalDict = RGOBase.AllRGO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
             IDList = RGOBase.AllRGO.Select(p => p.Value.ID).ToList();
         }
 
-        public override bool ProcessData()
+        public override DescriptionReply ProcessData(DescriptionRequest Request)
         {
+            var Reply = new DescriptionReply();
             uint ID = Request.ClientID;
-            if (!ClientSessions.ContainsKey(ID)) return false;
+            if (!ClientSessions.ContainsKey(ID)) return null;
 
             log.Debug($"Requested description {Request.RequestIndex}");
 
             int start = Math.Min(LocalDict.Count - 1, Request.RequestIndex);
             int nr = Math.Min(LocalDict.Count - start, ClientSessions[ID].BatchSize);
-            if (nr == 0) return false;
+            if (nr == 0) return null;
 
             Reply.Index = start;
             Reply.TotalNumber = IDList.Count;
@@ -38,7 +36,7 @@ namespace RGF
             Reply.Descriptions.Clear();
             foreach (var I in IDList.GetRange(start, nr)) Reply.Descriptions.Add(I, LocalDict[I]);
 
-            return true;
+            return Reply;
         }
     }
 }

@@ -11,12 +11,12 @@ namespace RGF
     public abstract class RGOService<TRequest, TReply> : RGOServiceBase where TRequest : class
                                                                         where TReply : class
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("RGOService");
+        protected log4net.ILog log = log4net.LogManager.GetLogger("RGOService");
 
         public int NrConnections { get { return server.NrConnections; } }
-        public TRequest Request;
-        public TReply Reply;
-        public abstract bool ProcessData();
+        //public TRequest Request;
+        //public TReply Reply;
+        public abstract TReply ProcessData(TRequest Request);
 
         protected ConnectionBase Connection { get; private set; }
 
@@ -85,6 +85,7 @@ namespace RGF
                     memStream.Write(Connection.IncomingData, 0, Connection.NrReceivedBytes);
                     Connection.DataReceived = false;
                     memStream.Seek(0, SeekOrigin.Begin);
+                    TRequest Request;
                     try
                     {
                         Request = (TRequest)binFormatter.Deserialize(memStream);
@@ -99,7 +100,8 @@ namespace RGF
                     }
 
                     //prepare the server reply
-                    if (ProcessData() == true)
+                    TReply Reply = ProcessData(Request);
+                    if (Reply != null)
                     {
                         //send the reply
                         memStream.Seek(0, SeekOrigin.Begin);

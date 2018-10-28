@@ -11,13 +11,13 @@ namespace RGF
     [Serializable]
     public class ServerInfo
     {
-        public bool ConnectionAccepted { get; set; }
+        public bool ConnectionAccepted { get; set; } = false;
 
         public long DT { get; private set; }
 
         public int CycleTime { get; set; }
 
-        public int SessionCounter { get; set; }
+        public long SessionCounter { get; set; }
 
         public void SetTime()
         {

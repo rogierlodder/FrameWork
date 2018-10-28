@@ -12,22 +12,21 @@ namespace RGF
             AllNTF = RGOBase.AllRGO.Values.Where(p => p is NTF).ToList();
         }
 
+        //public override bool ProcessData()
+        //{
+        //    foreach (var F in Request.WriteList) RGOBase.AllRGO[F.ID].CopyValues(F);
 
-        public override bool ProcessData()
-        {
-            foreach (var F in Request.WriteList) RGOBase.AllRGO[F.ID].CopyValues(F);
+        //    Reply.FWOList.Clear();
+        //    foreach (var N in AllNTF)
+        //    {
+        //        if (N.MustSerialize == true)
+        //        {
+        //            N.MustSerialize = false;
+        //            Reply.FWOList.Add(N);
+        //        }
+        //    }
 
-            Reply.FWOList.Clear();
-            foreach (var N in AllNTF)
-            {
-                if (N.MustSerialize == true)
-                {
-                    N.MustSerialize = false;
-                    Reply.FWOList.Add(N);
-                }
-            }
-
-            return true;
-        }
+        //    return true;
+        //}
     }
 }
