@@ -19,6 +19,7 @@ namespace RGF
         public bool IsConnected { get { return client.ConnState == CEthernetDevice.State.Connected; } }
         public bool Received { get { return client.Received; } }
         public bool Running { get; set; } = false;
+        public Action<string, string> ReportError { get; set; }
 
         protected CEthernetClient client;
         protected abstract void CreateRequest();

@@ -29,7 +29,9 @@ namespace RGF
             //generate "random" ClientID
             ClientID = (uint)DateTime.Now.Ticks;
             Request.ClientID = ClientID;
+            client.ReportError = p =>  ReportError?.Invoke("RGOClientServerComm", p);
         }
+
 
         protected override void CreateRequest()
         {

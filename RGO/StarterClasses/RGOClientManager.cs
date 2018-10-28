@@ -21,6 +21,7 @@ namespace RGF
         public RGOClientDescriptions DSCClient;
         public bool ClientHasStarted  { get; private set; } = false;
         public RGOStates state { get; private set; } = new RGOStates();
+        public bool ServerCommError { get; private set; }
 
         private RLSM SM = new RLSM("RGOClientManager");
         private Timer CycleTimer;
@@ -36,6 +37,11 @@ namespace RGF
             //start the Clients
             ServerComm = new RGOClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
             ServerComm.Running = true;
+            ServerComm.ReportError = (p, q) =>
+            {
+                log.Error($": Client {p} reported an errror: {q}");
+                ServerCommError = true;
+            };
 
             RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
@@ -59,7 +65,7 @@ namespace RGF
             {
                 new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Running = true, RGOStates.DownloadingAllFWO),
                 new Transition("ConnectionRejected", () => ServerComm.ConnectionRejected, () => log.Error("The connection was rejected by the server."), RGOStates.Disconnected)
-            }, null, StateType.entry);
+            }, () => ServerCommError = false, StateType.entry);
 
             SM.AddState(RGOStates.DownloadingAllFWO, new List<Transition>
             {
@@ -74,6 +80,7 @@ namespace RGF
             SM.AddState(RGOStates.Running, new List<Transition>
             {
                 new Transition("ServerCommDisconnected", () => ServerComm.ServerConnected == false, null, RGOStates.Disconnected),
+                new Transition("ServerCommErrorReported", () => ServerCommError == true, null, RGOStates.Disconnected),
             }, null, StateType.idle);
 
             SM.AddState(RGOStates.Disconnected, new List<Transition>

@@ -19,6 +19,7 @@ namespace RGF
             Request.ClientID = ClientID;
 
             Reply = new ReplyRW();
+            client.ReportError = p => ReportError?.Invoke("RGOClientRW", p);
         }
 
         protected override void CreateRequest()
