@@ -32,14 +32,21 @@ namespace RGF
             client.ReportError = p =>  ReportError?.Invoke("RGOClientServerComm", p);
         }
 
-
         protected override void CreateRequest()
         {
             Request.Counter++;
             ServerCommCounter = Request.Counter;
         }
 
-        protected override void ProcessReply ()
+        public override void Disconnect()
+        {
+            base.Disconnect();
+            Request.Counter = 0;
+            ServerConnected = false;
+            ConnectionRejected = false;
+        }
+
+        protected override void ProcessReply()
         {
             //check every incoming packet that the server has not rejected the connection
             WaitingForReply = false;
@@ -47,6 +54,7 @@ namespace RGF
             {
                 ConnectionRejected = true;
                 ServerConnected = false;
+                return;
             }
             else
             {

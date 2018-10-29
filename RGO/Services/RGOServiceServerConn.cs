@@ -79,6 +79,7 @@ namespace RGF
                 Reply.SetTime();
                 Reply.SessionCounter = Request.Counter;
                 Reply.CycleTime = RGOServiceStarter.MeasuredCycleTime;
+                Reply.ConnectionAccepted = true;
             }
 
             return Reply;

@@ -7,8 +7,8 @@
     <ProjectGuid>{E18EF332-DB01-4DC5-A85F-2308DBAF5275}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FWO</RootNamespace>
-    <AssemblyName>FWO</AssemblyName>
+    <RootNamespace>RGF</RootNamespace>
+    <AssemblyName>RGF</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

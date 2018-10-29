@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 
-namespace FWOClientTests
+namespace RGOClientTests
 {
     public class RGOClientTest
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         RGOClientManager RGOMan = new RGOClientManager();
+
         RGOClientRW FWORWClient;
 
         void CreateWriteList()
@@ -22,7 +23,7 @@ namespace FWOClientTests
 
         async void StartApplication()
         {
-            RGOMan.StartClients(45010, "127.0.0.1", 200, true);
+            RGOClientManager.StartClients(45010, "127.0.0.1", 200, true);
 
             await RGOMan.WaitForClientConnectTask();
             log.Info("Client connected to server");

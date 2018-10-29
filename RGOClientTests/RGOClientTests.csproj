@@ -7,8 +7,8 @@
     <ProjectGuid>{EECAD8BA-92DB-40E2-841C-52905E616471}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FWOClientTests</RootNamespace>
-    <AssemblyName>FWOClientTests</AssemblyName>
+    <RootNamespace>RGOClientTests</RootNamespace>
+    <AssemblyName>RGOClientTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

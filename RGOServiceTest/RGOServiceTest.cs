@@ -8,7 +8,7 @@ using System.Windows.Threading;
 using System.Net;
 using System.Diagnostics;
 
-namespace FWOTestingApplication
+namespace RGOTesting
 {
     class RGOServiceTest
     {

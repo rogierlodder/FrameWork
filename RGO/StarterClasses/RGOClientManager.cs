@@ -8,25 +8,26 @@ using RLStateMachine;
 
 namespace RGF
 {
-    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnected }
+    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnecting, Disconnected }
 
     public class RGOClientManager : RGOStarterBase
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private static int InstanceCounter = 0;
         //clients
-        public RGOClientServerComm ServerComm { get; private set; }
-        public RGOClientNotifications NotifClient;
-        public RGOClientFWO RGOClientDownloader;
-        public RGOClientDescriptions DSCClient;
-        public bool ClientHasStarted  { get; private set; } = false;
-        public RGOStates state { get; private set; } = new RGOStates();
-        public bool ServerCommError { get; private set; }
+        public static RGOClientServerComm ServerComm { get; private set; }
+        public static RGOClientNotifications NotifClient;
+        public static RGOClientFWO RGOClientDownloader;
+        public static RGOClientDescriptions DSCClient;
+        public static bool ClientHasStarted  { get; private set; } = false;
+        public static RGOStates state { get; private set; } = new RGOStates();
+        public static bool ServerCommError { get; private set; }
+        public static bool Reconnect { get; set; } = true;
 
-        private RLSM SM = new RLSM("RGOClientManager");
-        private Timer CycleTimer;
+        private static RLSM SM = new RLSM("RGOClientManager");
+        private static Timer CycleTimer;
 
-        public void StartClients(int basePortNr, string ServerAddress, int cycleTime, bool runFromTimer)
+        public static void StartClients(int basePortNr, string ServerAddress, int cycleTime, bool runFromTimer)
         {
             state = RGOStates.ConnectingToServer;
             RGOBase.RunsOnServer = false;
@@ -36,7 +37,7 @@ namespace RGF
 
             //start the Clients
             ServerComm = new RGOClientServerComm(ServerAddress, ServerCommServicePort, "ServerCommService");
-            ServerComm.Running = true;
+            ServerComm.Connect();
             ServerComm.ReportError = (p, q) =>
             {
                 log.Error($": Client {p} reported an errror: {q}");
@@ -44,6 +45,7 @@ namespace RGF
             };
 
             RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
+
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
@@ -52,6 +54,12 @@ namespace RGF
 
         public RGOClientManager()
         {
+            InstanceCounter++;
+            if (InstanceCounter > 1)
+            {
+                throw new Exception("Only one instance of the RGOclientManager may be created in this scope");
+            }
+
             SM.FirstAction = () =>
             {
                 //run the state machines of all clients
@@ -63,13 +71,13 @@ namespace RGF
 
             SM.AddState(RGOStates.ConnectingToServer, new List<Transition>
             {
-                new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Running = true, RGOStates.DownloadingAllFWO),
-                new Transition("ConnectionRejected", () => ServerComm.ConnectionRejected, () => log.Error("The connection was rejected by the server."), RGOStates.Disconnected)
+                new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Connect(), RGOStates.DownloadingAllFWO),
+                new Transition("ConnectionRejected", () => ServerComm.ConnectionRejected, () => log.Error("The connection was rejected by the server."), RGOStates.ConnectingToServer)
             }, () => ServerCommError = false, StateType.entry);
 
             SM.AddState(RGOStates.DownloadingAllFWO, new List<Transition>
             {
-                new Transition("DownloadDone", () => RGOClientDownloader.RGODownloadDone == true, () => DSCClient.Running = true,  RGOStates.DownloadingDSC),
+                new Transition("DownloadDone", () => RGOClientDownloader.RGODownloadDone == true, () => DSCClient.Connect(),  RGOStates.DownloadingDSC),
             }, null, StateType.transition);
 
             SM.AddState(RGOStates.DownloadingDSC, new List<Transition>
@@ -79,23 +87,34 @@ namespace RGF
 
             SM.AddState(RGOStates.Running, new List<Transition>
             {
-                new Transition("ServerCommDisconnected", () => ServerComm.ServerConnected == false, null, RGOStates.Disconnected),
-                new Transition("ServerCommErrorReported", () => ServerCommError == true, null, RGOStates.Disconnected),
+                new Transition("ServerCommDisconnected", () => ServerComm.ServerConnected == false, null, RGOStates.Disconnecting),
+                new Transition("ServerCommErrorReported", () => ServerCommError == true, null, RGOStates.Disconnecting),
             }, null, StateType.idle);
+
+            SM.AddState(RGOStates.Disconnecting, new List<Transition>
+            {
+                new Transition("AllClientsDisconnected", () => true, null, RGOStates.Disconnected),
+            },
+            () =>
+            {
+                foreach (var C in RGOClientBase.AllClients) C.Disconnect();
+            }, StateType.transition);
 
             SM.AddState(RGOStates.Disconnected, new List<Transition>
             {
-
-            }, () =>
-            {
-                foreach (var C in RGOClientBase.AllClients) C.Disconnect();
-            }, StateType.end);
+                new Transition("Reconnect", () => Reconnect == true, () =>
+                {
+                    ServerComm.Connect();
+                    //foreach (var C in RGOClientBase.AllClients) C.Connect();
+                }
+                , RGOStates.ConnectingToServer)  
+            }, null, StateType.end);
 
             SM.Finalize();
         }
 
 
-        private void Run(object o)
+        private static void Run(object o)
         {
             SM.Run();
         }

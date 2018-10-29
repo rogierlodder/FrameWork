@@ -7,8 +7,8 @@
     <ProjectGuid>{AC219A74-FF0B-4D6A-A6E5-EB89C0B08FC1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FWOTestingApplication</RootNamespace>
-    <AssemblyName>FWOTestingApplication</AssemblyName>
+    <RootNamespace>RGOTesting</RootNamespace>
+    <AssemblyName>RGOServiceTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
