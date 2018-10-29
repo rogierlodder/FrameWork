@@ -27,9 +27,9 @@ namespace RGF
             RGODownloadDone = false;
         }
 
-        public override void Connect()
+        public override void Disconnect()
         {
-            base.Connect();
+            base.Disconnect();
             Request.RequestIndex = 0;
             RGODownloadDone = false;
             NrReceivedFWO = 0;

@@ -26,9 +26,17 @@ namespace RGF
             }
 
             Reply = new DescriptionReply();
-
             Request = new DescriptionRequest();
 
+            Request.ClientID = ClientID;
+            Request.RequestIndex = 0;
+            DSCsReceived = false;
+        }
+
+        public override void Disconnect()
+        {
+            base.Disconnect();
+            NrReceivedDSC = 0;
             Request.ClientID = ClientID;
             Request.RequestIndex = 0;
             DSCsReceived = false;

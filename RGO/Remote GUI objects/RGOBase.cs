@@ -115,13 +115,9 @@ namespace RGF
         /// </summary>
         public void AddToFWOList()
         {
-            if (AllRGO.ContainsKey(ID))
+            if (!AllRGO.ContainsKey(ID))
             {
-                throw new Exception($"A FrameWorkVariable with this key {ID} already exists");
-            }
-            else
-            {
-                AllRGO.Add(ID, this);
+                 AllRGO.Add(ID, this);
             }
         }
 

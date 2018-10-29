@@ -8,7 +8,7 @@ using RLStateMachine;
 
 namespace RGF
 {
-    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnecting, Disconnected }
+    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnecting, Disconnected, Stopped }
 
     public class RGOClientManager : RGOStarterBase
     {
@@ -45,7 +45,6 @@ namespace RGF
             };
 
             RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
-
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
@@ -82,7 +81,11 @@ namespace RGF
 
             SM.AddState(RGOStates.DownloadingDSC, new List<Transition>
             {
-                new Transition("DescriptionsReceived", () => DSCClient.DSCsReceived == true, () => log.Info("All RGO downloads done"), RGOStates.Running),
+                new Transition("DescriptionsReceived", () => DSCClient.DSCsReceived == true, () => 
+                {
+                    log.Info("All RGO downloads done");
+                    foreach (var C in RGOClientBase.AllClients) C.Connect();
+                }, RGOStates.Running),
             }, null, StateType.transition);
 
             SM.AddState(RGOStates.Running, new List<Transition>
@@ -105,7 +108,6 @@ namespace RGF
                 new Transition("Reconnect", () => Reconnect == true, () =>
                 {
                     ServerComm.Connect();
-                    //foreach (var C in RGOClientBase.AllClients) C.Connect();
                 }
                 , RGOStates.ConnectingToServer)  
             }, null, StateType.end);
