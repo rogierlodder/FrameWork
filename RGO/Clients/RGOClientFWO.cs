@@ -27,6 +27,14 @@ namespace RGF
             RGODownloadDone = false;
         }
 
+        public override void Connect()
+        {
+            base.Connect();
+            Request.RequestIndex = 0;
+            RGODownloadDone = false;
+            NrReceivedFWO = 0;
+        }
+
         protected override void CreateRequest() { }
 
         protected override void ProcessReply()
@@ -37,8 +45,7 @@ namespace RGF
 
             foreach (var F in Reply.FWOBjects)
             {
-                
-                F.AddToFWOList();
+                 F.AddToFWOList();
             }
 
             NrReceivedFWO += Reply.FWOBjects.Count;

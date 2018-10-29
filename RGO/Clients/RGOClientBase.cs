@@ -24,5 +24,6 @@ namespace RGF
         public abstract bool Run();
 
         public abstract void Disconnect();
+        public abstract void Connect();
     }
 }

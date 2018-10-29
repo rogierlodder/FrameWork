@@ -41,7 +41,7 @@ namespace RGF
             {
                 client = new CEthernetClient("");
                 client.SetConnection(IPAddress, portNr, "TCP");
-                client.Connect();
+                //client.Connect();
                 client.ByteDataReceived = ProcessReceivedData;
             }
             catch
@@ -55,6 +55,13 @@ namespace RGF
         {
             client.Disconnect();
             Running = false;
+        }
+
+        public override void Connect()
+        {
+            client.Connect();
+            Running = true;
+            WaitingForReply = false;
         }
 
         public void ProcessReceivedData(int nrBytes)
