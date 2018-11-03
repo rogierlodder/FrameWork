@@ -67,7 +67,7 @@ namespace RGF
             ModNr = modnr;
             ID = CalcID(modnr, id);
             Description = desc;
-            AddToFWOList();
+            AddToRGOList();
         }
 
         public static void AddClientID(uint ID)
@@ -113,7 +113,7 @@ namespace RGF
         /// <summary>
         /// Add a new RGO to the static list
         /// </summary>
-        public void AddToFWOList()
+        public void AddToRGOList()
         {
             if (!AllRGO.ContainsKey(ID))
             {

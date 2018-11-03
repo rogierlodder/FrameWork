@@ -8,7 +8,7 @@ namespace RGF
 {
     public class RGOlabel : Label, IUpdatableControl
     {
-        private RGOBase FWObject;
+        private RGOBase RGObject;
 
         private string[] errorString, onString, transitionString;
         private bool IsStatusVariableString = false;
@@ -48,9 +48,9 @@ namespace RGF
         {
             ObjectIDs = new List<ObjectID>();
             ObjectIDs.Add(new ObjectID(RGOBase.CalcID(modnr, id), ElementTypeEnum.Read));
-            FWObject = RGOBase.GetFromID(modnr, id);
+            RGObject = RGOBase.GetFromID(modnr, id);
 
-            if (FWObject != null)
+            if (RGObject != null)
             {
                 errorString = (ControlsHelper.RemoveSpaces(Error)).Split(',');
                 onString = (ControlsHelper.RemoveSpaces(On)).Split(',');
@@ -58,10 +58,10 @@ namespace RGF
 
                 if (Error != "" || On != "" || Transition != "") IsStatusVariableString = true;
                 //add this element to the list of all elementrs so that the request and reply classes can be created for the RGOServices
-                UDC.AllControls.Add(this);
+                UpdatableControlCollector.AllControls.Add(this);
 
                 //subscribe to the update delegate of the FWObject
-                FWObject.Update += Update;
+                RGObject.Update += Update;
 
                 Background = ControlsHelper.Transparent;
             }
@@ -72,7 +72,7 @@ namespace RGF
         {
             if (IsStatusVariableString)
             {
-                string s = FWObject.GetValueAsString();
+                string s = RGObject.GetValueAsString();
                 Content = s;
                 if (errorString != null && errorString.Contains(s)) Background = ControlsHelper.ErrorColor;
                 else if (onString != null && onString.Contains(s)) Background = ControlsHelper.OnColor;
@@ -81,8 +81,8 @@ namespace RGF
             }
             else
             {
-                if (NrDigits == -1) Content = FWObject.GetValueAsString();
-                else Content = FWObject.GetValueAsString(NrDigits);
+                if (NrDigits == -1) Content = RGObject.GetValueAsString();
+                else Content = RGObject.GetValueAsString(NrDigits);
             }
         }
     }

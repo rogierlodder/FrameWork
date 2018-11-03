@@ -32,7 +32,7 @@ namespace RGF
                     else log.Debug($"Client {ClientID} could not be removed from the client list of the {Server.Name}");
                 }
                 //remove the client from the RGO elements
-                ClientSessions[ClientID].DeleteFWORef(ClientID);
+                ClientSessions[ClientID].DeleteRGORef(ClientID);
 
 
                 //erase the client from the sesions list

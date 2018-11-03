@@ -28,7 +28,7 @@ namespace RGF
         protected byte[] receiveBuf = new byte[65536];
         protected bool WaitingForReply = false;
 
-        private log4net.ILog log;// = log4net.LogManager.GetLogger("RGOClient<>");
+        private log4net.ILog log;
         private MemoryStream memStream = new MemoryStream();
         private BinaryFormatter formatter = new BinaryFormatter();
         private Stopwatch sw = new Stopwatch();
@@ -41,7 +41,6 @@ namespace RGF
             {
                 client = new CEthernetClient("");
                 client.SetConnection(IPAddress, portNr, "TCP");
-                //client.Connect();
                 client.ByteDataReceived = ProcessReceivedData;
             }
             catch
@@ -62,6 +61,16 @@ namespace RGF
             client.Connect();
             Running = true;
             WaitingForReply = false;
+        }
+
+        public void Stop()
+        {
+            Running = false;
+        }
+
+        public void Start()
+        {
+            Running = true;
         }
 
         public void ProcessReceivedData(int nrBytes)

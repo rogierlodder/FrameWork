@@ -237,7 +237,7 @@ namespace FrameWorkUnitTests
         }
 
         [TestMethod]
-        public void FWO_Array_test()
+        public void RGO_Array_test()
         {
             RGOBase.ClearAll();
             RGOBase T = null;
@@ -255,7 +255,7 @@ namespace FrameWorkUnitTests
         }
 
         [TestMethod]
-        public void FWO_GetValueAsString()
+        public void RGO_GetValueAsString()
         {
             RGOBase.ClearAll();
 

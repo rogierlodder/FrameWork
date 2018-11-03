@@ -10,7 +10,7 @@ namespace RGF
     {
         //Services
         private static RGOServiceServerConn ServerConn;
-        private static RGOServiceTransfer FWOConn;
+        private static RGOServiceTransfer RGOConn;
         private static RGOServiceRW RWService;
         private static RGOServiceDescriptions DescriptionService;
         private static RGOServiceNotification Notificationservice;
@@ -18,7 +18,7 @@ namespace RGF
         public static Action<bool, uint> ConnStateChanged;
 
         public static int ServerConnBufSize { get; set; } = 500000;
-        public static int FWOServiceBufSize { get; set; } = 500000;
+        public static int RGOServiceBufSize { get; set; } = 500000;
         public static int RWServiceBufSize { get; set; } = 500000;
         public static int DescriptionServiceBufSize { get; set; } = 500000;
         public static int NotifServiceBufSize { get; set; } = 500000;
@@ -39,7 +39,7 @@ namespace RGF
 
             //Start the Services
             ServerConn          = new RGOServiceServerConn  ("ServerCommService", ServerCommServicePort);
-            FWOConn             = new RGOServiceTransfer    ("FrameWorkObjectService", FrameWorkObjectServiceport, FWOServiceBufSize);
+            RGOConn             = new RGOServiceTransfer    ("FrameWorkObjectService", FrameWorkObjectServiceport, RGOServiceBufSize);
             RWService           = new RGOServiceRW          ("RWService", RWServicePort, RWServiceBufSize);
             DescriptionService  = new RGOServiceDescriptions("DescriptionService", DescriptionServicePort, DescriptionServiceBufSize);
             Notificationservice = new RGOServiceNotification("NotificationService", NotificationServicePort, NotifServiceBufSize);

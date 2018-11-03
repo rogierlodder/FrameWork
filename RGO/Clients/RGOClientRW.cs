@@ -31,9 +31,9 @@ namespace RGF
         {
             WaitingForReply = false;
 
-            log.Debug($"ClientRW {Reply.FWOList.Count} objects received");
+            log.Debug($"ClientRW {Reply.RGOList.Count} objects received");
 
-            foreach (var F in Reply.FWOList)
+            foreach (var F in Reply.RGOList)
             {
                 string id = F.ID;
                 RGOBase.AllRGO[id].CopyValues(F);

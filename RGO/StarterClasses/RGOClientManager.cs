@@ -8,7 +8,7 @@ using RLStateMachine;
 
 namespace RGF
 {
-    public enum RGOStates { ConnectingToServer, StartFWOCLient, DownloadingAllFWO, StartingDSCClient, DownloadingDSC, Running, Disconnecting, Disconnected, Stopped }
+    public enum RGOStates { ConnectingToServer, StartRGOCLient, DownloadingAllRGO, StartingDSCClient, DownloadingDSC, Running, Disconnecting, Disconnected, Stopped }
 
     public class RGOClientManager : RGOStarterBase
     {
@@ -17,7 +17,7 @@ namespace RGF
         //clients
         public static RGOClientServerComm ServerComm { get; private set; }
         public static RGOClientNotifications NotifClient;
-        public static RGOClientFWO RGOClientDownloader;
+        public static RGOClientRGO RGOClientDownloader;
         public static RGOClientDescriptions DSCClient;
         public static bool ClientHasStarted  { get; private set; } = false;
         public static RGOStates state { get; private set; } = new RGOStates();
@@ -44,7 +44,7 @@ namespace RGF
                 ServerCommError = true;
             };
 
-            RGOClientDownloader = new RGOClientFWO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
+            RGOClientDownloader = new RGOClientRGO(ServerAddress, FrameWorkObjectServiceport, "FrameWorkObjectService");
             DSCClient = new RGOClientDescriptions(ServerAddress, DescriptionServicePort, "DescriptionService");
 
             CycleTimer = new Timer(Run);
@@ -70,11 +70,11 @@ namespace RGF
 
             SM.AddState(RGOStates.ConnectingToServer, new List<Transition>
             {
-                new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Connect(), RGOStates.DownloadingAllFWO),
+                new Transition("ServerConnected", () => ServerComm.ServerConnected, () => RGOClientDownloader.Connect(), RGOStates.DownloadingAllRGO),
                 new Transition("ConnectionRejected", () => ServerComm.ConnectionRejected, () => log.Error("The connection was rejected by the server."), RGOStates.ConnectingToServer)
             }, () => ServerCommError = false, StateType.entry);
 
-            SM.AddState(RGOStates.DownloadingAllFWO, new List<Transition>
+            SM.AddState(RGOStates.DownloadingAllRGO, new List<Transition>
             {
                 new Transition("DownloadDone", () => RGOClientDownloader.RGODownloadDone == true, () => DSCClient.Connect(),  RGOStates.DownloadingDSC),
             }, null, StateType.transition);

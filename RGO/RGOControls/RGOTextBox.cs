@@ -60,7 +60,7 @@ namespace RGF
 
             if (stp != null && stp.GetType().Name.Contains("STP"))
             {
-                UDC.AllControls.Add(this);
+                UpdatableControlCollector.AllControls.Add(this);
                 stp.Update += Update;
             }
         }

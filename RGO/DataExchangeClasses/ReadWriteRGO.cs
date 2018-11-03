@@ -16,7 +16,7 @@ namespace RGF
     [Serializable]
     public class ReplyRW
     {
-        public List<RGOBase> FWOList = new List<RGOBase>();
+        public List<RGOBase> RGOList = new List<RGOBase>();
         public List<bool> WriteOKList = new List<bool>();
         public bool ConnectionAccepted = false;
     }

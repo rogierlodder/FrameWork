@@ -18,6 +18,6 @@ namespace RGF
         public int TotalNumber { get; set; }
         public int Index { get; set; }
 
-        public List<RGOBase> FWOBjects;
+        public List<RGOBase> RGObjects;
     }
 }

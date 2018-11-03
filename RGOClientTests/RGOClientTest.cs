@@ -14,11 +14,11 @@ namespace RGOClientTests
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         RGOClientManager RGOMan = new RGOClientManager();
 
-        RGOClientRW FWORWClient;
+        RGOClientRW RGORWClient;
 
         void CreateWriteList()
         {
-            foreach (var F in FWORWClient.Request.WriteList) F.MustSerialize = true;
+            foreach (var F in RGORWClient.Request.WriteList) F.MustSerialize = true;
         }
 
         async void StartApplication()
@@ -28,11 +28,11 @@ namespace RGOClientTests
             await RGOMan.WaitForClientConnectTask();
             log.Info("Client connected to server");
 
-            FWORWClient = new RGOClientRW("127.0.0.1", "RGORWService");
-            for (int i = 10000; i < 10000 + 100; i++) FWORWClient.Request.ReqList.Add($"{i}0");
+            RGORWClient = new RGOClientRW("127.0.0.1", "RGORWService");
+            for (int i = 10000; i < 10000 + 100; i++) RGORWClient.Request.ReqList.Add($"{i}0");
 
-            FWORWClient.Connect();
-            FWORWClient.CreateWriteList = CreateWriteList;
+            RGORWClient.Connect();
+            RGORWClient.CreateWriteList = CreateWriteList;
 
             await RGOMan.WaitForClientDisconnectTask();
             log.Info("Connection to server lost");

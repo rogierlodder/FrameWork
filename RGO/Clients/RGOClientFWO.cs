@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 
 namespace RGF
 {
-    public class RGOClientFWO : RGOClient<RequestAllRGO, ReplyAllRGO>
+    public class RGOClientRGO : RGOClient<RequestAllRGO, ReplyAllRGO>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("RGOClientFWO");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOClientRGO");
 
         public bool RGODownloadDone { get; private set; } = false;
 
-        private int NrReceivedFWO = 0;
+        private int NrReceivedRGO = 0;
 
-        public RGOClientFWO(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
+        public RGOClientRGO(string IPAddress, int portNr, string serviceName) : base(IPAddress, portNr, serviceName)
         {
             if (ClientID == 0)
             {
@@ -32,7 +32,7 @@ namespace RGF
             base.Disconnect();
             Request.RequestIndex = 0;
             RGODownloadDone = false;
-            NrReceivedFWO = 0;
+            NrReceivedRGO = 0;
         }
 
         protected override void CreateRequest() { }
@@ -43,17 +43,17 @@ namespace RGF
             //if (Reply.FWOBjects.Count != 0) WaitingForReply = false;
             //else return;
 
-            foreach (var F in Reply.FWOBjects)
+            foreach (var F in Reply.RGObjects)
             {
-                 F.AddToFWOList();
+                 F.AddToRGOList();
             }
 
-            NrReceivedFWO += Reply.FWOBjects.Count;
-            Request.RequestIndex += Reply.FWOBjects.Count;
+            NrReceivedRGO += Reply.RGObjects.Count;
+            Request.RequestIndex += Reply.RGObjects.Count;
 
-            log.Debug($"number of received RGO {NrReceivedFWO}");
+            log.Debug($"number of received RGO {NrReceivedRGO}");
 
-            if (NrReceivedFWO >= Reply.TotalNumber)
+            if (NrReceivedRGO >= Reply.TotalNumber)
             {
                 RGODownloadDone = true;
 

@@ -46,7 +46,7 @@ namespace RGF
 
             if (command != null)
             {
-                UDC.AllControls.Add(this);
+                UpdatableControlCollector.AllControls.Add(this);
                 command.Update += Update;
             }
         }

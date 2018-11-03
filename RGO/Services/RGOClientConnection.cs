@@ -24,7 +24,7 @@ namespace RGF
             RGOBase.AddClientID(ID);
         }
 
-        public void DeleteFWORef(uint ID)
+        public void DeleteRGORef(uint ID)
         {
             RGOBase.RemoveClientID(ID);
         }
