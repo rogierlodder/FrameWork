@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using log4net.Appender;
 using log4net.Core;
 
-namespace FWOClientTests
+namespace RGOClientTests
 {
     public class CustomAppender : AppenderSkeleton
     {

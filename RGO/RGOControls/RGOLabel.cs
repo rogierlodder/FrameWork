@@ -60,7 +60,7 @@ namespace RGF
                 //add this element to the list of all elementrs so that the request and reply classes can be created for the RGOServices
                 UpdatableControlCollector.AllControls.Add(this);
 
-                //subscribe to the update delegate of the FWObject
+                //subscribe to the update delegate of the RGObject
                 RGObject.Update += Update;
 
                 Background = ControlsHelper.Transparent;

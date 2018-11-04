@@ -12,7 +12,7 @@ namespace RGOTesting
 {
     class RGOServiceTest
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("FWOServiceTest");
+        log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceTest");
 
         const int ServiceCycleInterval = 1;
         private int ServiceCycleCounter = 0;

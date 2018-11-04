@@ -122,7 +122,7 @@ namespace RGF
         }
 
         /// <summary>
-        /// Copy the relevant values from a deserialized object to the object in the AllFWO list with the same ID
+        /// Copy the relevant values from a deserialized object to the object in the AllRGO list with the same ID
         /// </summary>
         /// <param name="newVal"></param>
         public abstract void CopyValues(RGOBase newVal);

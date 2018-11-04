@@ -36,7 +36,7 @@ namespace RGF
         public string Key { get; set; }
 
         /// <summary>
-        /// A list of IDS of all the FWObjects this screen could potentially write
+        /// A list of IDS of all the RGObjects this screen could potentially write
         /// </summary>
         public List<string> WriteListIDs = new List<string>();
 
@@ -73,7 +73,7 @@ namespace RGF
         }
 
         /// <summary>
-        /// Collect all the FWOobjects used by all elements in this screen.
+        /// Collect all the RGOobjects used by all elements in this screen.
         /// </summary>
         public virtual void Setup(string ServerIP)
         {

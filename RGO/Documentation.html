@@ -78,20 +78,19 @@
     There are five services. Each server handles a particular kind of traffic
     <ol>
         <li>ServerConn - initiates and monitors the connection</li>
-        <li>FWOConn - transmits the FWO object</li>
-        <li>RWService - the main service for exchanging FWO objects</li>
-        <li>DescriptionService - the descriptions of the FWOs can be quite long, so are not serialized for performance
-            reasons. With this service they can be transmitted once during startup after all the FWO have been transferred
+        <li>RGORWService - the main service for exchanging RGO objects</li>
+        <li>DescriptionService - the descriptions of the RGO can be quite long, so are not serialized for performance
+            reasons. With this service they can be transmitted once during startup after all the RGO have been transferred
             and created by the client</li>
         <li>NotificationService - This is the service used for errors / alarms / notifications</>
     </ol>
 
         <h1>Implementation details</h1>
 
-        Here are more FWO properties:<br>
-        Each FWO object “knows” whether is is running on the server or the GUI. There is a static variable set by the
+        Here are more RGO properties:<br>
+        Each RGO object “knows” whether is is running on the server or the GUI. There is a static variable set by the
         client manager
-        There is a static dictionary containing all the FWO objects in the FWO class
+        There is a static dictionary containing all the RGO objects in the RGO class
 
         Each service can handle multiple clients.<br>
         For every request, the client includes its ID<br>
