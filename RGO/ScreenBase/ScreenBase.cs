@@ -50,6 +50,7 @@ namespace RGF
 
         }
 
+        public abstract void Setup();
 
         protected void SetupAllRGOElements(Panel panel, int modnr)
         {
@@ -75,7 +76,7 @@ namespace RGF
         /// <summary>
         /// Collect all the RGOobjects used by all elements in this screen.
         /// </summary>
-        public virtual void Setup(string ServerIP)
+        public virtual void SetupConnection(string ServerIP)
         {
             //start the RGO client
             RGOClient = new RGOClientRW(ServerIP, "RGOReadWriteService");
@@ -126,5 +127,6 @@ namespace RGF
                 else if (U is TabControl) foreach (TabItem I in (U as TabControl).Items) IterateAllUIElements((I as ContentControl).Content as Panel, setup);
             }
         }
+
     }
 }

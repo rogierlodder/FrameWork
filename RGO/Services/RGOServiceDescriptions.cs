@@ -7,13 +7,14 @@ namespace RGF
 {
     public class RGOServiceDescriptions : RGOService<DescriptionRequest, DescriptionReply>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceDescriptions");
+        //static log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceDescriptions");
 
         Dictionary<string, string> LocalDict = new Dictionary<string, string>();
         List<string> IDList = new List<string>();
 
         public RGOServiceDescriptions(string name, int portNr, int bufferSize) : base(name, portNr, bufferSize)
         {
+            log = log4net.LogManager.GetLogger("RGOServiceDescriptions");
             LocalDict = RGOBase.AllRGO.Select(p => p.Value).ToDictionary(p => p.ID, p => p.Description);
             IDList = RGOBase.AllRGO.Select(p => p.Value.ID).ToList();
         }

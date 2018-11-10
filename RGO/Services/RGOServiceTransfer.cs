@@ -6,7 +6,7 @@ namespace RGF
 {
     public class RGOServiceTransfer : RGOService<RequestAllRGO, ReplyAllRGO>
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceRGO");
+       //static  log4net.ILog log = log4net.LogManager.GetLogger("RGOServiceRGO");
 
         List<RGOBase> LocalRGOList = new List<RGOBase>();
 
@@ -17,6 +17,7 @@ namespace RGF
 
         public override ReplyAllRGO ProcessData(RequestAllRGO Request)
         {
+            log = log4net.LogManager.GetLogger("RGOServiceRGO");
             var Reply = new ReplyAllRGO();
             uint ID = Request.ClientID;
             if (!ClientSessions.ContainsKey(ID)) return null;
